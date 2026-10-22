@@ -1,0 +1,31 @@
+name: Notas de la crítica (OpenCritic vía Wikidata)
+
+on:
+  schedule:
+    - cron: "17 4 * * 1"   # cada lunes a primera hora
+  workflow_dispatch:
+  push:
+    paths:
+      - "herramientas/actualizar_notas_critica.py"
+      - ".github/workflows/notas-de-la-critica.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar:
+    name: Actualizar la lista de notas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Descargar las notas de Wikidata
+        run: python herramientas/actualizar_notas_critica.py
+      - name: Guardar la lista si ha cambiado
+        run: |
+          git config user.name "Notas de la crítica"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add datos/notas-critica.json
+          git diff --cached --quiet || git commit -m "Notas de la crítica actualizadas desde Wikidata" && git push
