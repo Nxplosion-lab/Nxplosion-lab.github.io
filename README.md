@@ -1,6 +1,6 @@
-# Duk3X · web
+# NXplosion Labs · web
 
-Web pública de las apps de Duk3X.
+Web pública de las apps de NXplosion Labs.
 
 - Política de privacidad: https://nxplosion-lab.github.io/privacy.html
 - Contacto: duk3x.dev@gmail.com
