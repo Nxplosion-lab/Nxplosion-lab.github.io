@@ -1,0 +1,29 @@
+name: Web en 22 idiomas
+
+# Comprueba que todos los idiomas tienen todos los textos (con las mismas etiquetas que el español)
+# y que las páginas publicadas están al día con las plantillas y los textos.
+on:
+  push:
+    paths:
+      - "herramientas/web/**"
+      - "herramientas/generar_web.py"
+      - "*.html"
+      - "*/index.html"
+      - "*/privacy.html"
+      - ".github/workflows/web-en-22-idiomas.yml"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comprobar:
+    name: Textos completos y páginas al día
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: python3 herramientas/generar_web.py --check

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="th" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Platinum Hunter · นโยบายความเป็นส่วนตัว</title><link rel="canonical" href="https://nxplosion-lab.github.io/th/privacy.html"><link rel="alternate" hreflang="es" href="https://nxplosion-lab.github.io/privacy.html"><link rel="alternate" hreflang="en" href="https://nxplosion-lab.github.io/en/privacy.html"><link rel="alternate" hreflang="fr" href="https://nxplosion-lab.github.io/fr/privacy.html"><link rel="alternate" hreflang="de" href="https://nxplosion-lab.github.io/de/privacy.html"><link rel="alternate" hreflang="it" href="https://nxplosion-lab.github.io/it/privacy.html"><link rel="alternate" hreflang="pt-PT" href="https://nxplosion-lab.github.io/pt-pt/privacy.html"><link rel="alternate" hreflang="nl" href="https://nxplosion-lab.github.io/nl/privacy.html"><link rel="alternate" hreflang="pl" href="https://nxplosion-lab.github.io/pl/privacy.html"><link rel="alternate" hreflang="ru" href="https://nxplosion-lab.github.io/ru/privacy.html"><link rel="alternate" hreflang="uk" href="https://nxplosion-lab.github.io/uk/privacy.html"><link rel="alternate" hreflang="tr" href="https://nxplosion-lab.github.io/tr/privacy.html"><link rel="alternate" hreflang="es-419" href="https://nxplosion-lab.github.io/es-419/privacy.html"><link rel="alternate" hreflang="pt-BR" href="https://nxplosion-lab.github.io/pt-br/privacy.html"><link rel="alternate" hreflang="ja" href="https://nxplosion-lab.github.io/ja/privacy.html"><link rel="alternate" hreflang="ko" href="https://nxplosion-lab.github.io/ko/privacy.html"><link rel="alternate" hreflang="zh-Hans" href="https://nxplosion-lab.github.io/zh-hans/privacy.html"><link rel="alternate" hreflang="zh-Hant" href="https://nxplosion-lab.github.io/zh-hant/privacy.html"><link rel="alternate" hreflang="hi" href="https://nxplosion-lab.github.io/hi/privacy.html"><link rel="alternate" hreflang="id" href="https://nxplosion-lab.github.io/id/privacy.html"><link rel="alternate" hreflang="th" href="https://nxplosion-lab.github.io/th/privacy.html"><link rel="alternate" hreflang="vi" href="https://nxplosion-lab.github.io/vi/privacy.html"><link rel="alternate" hreflang="ar" href="https://nxplosion-lab.github.io/ar/privacy.html"><link rel="alternate" hreflang="x-default" href="https://nxplosion-lab.github.io/privacy.html">
+<style>
+  :root { --bg:#ffffff; --fg:#1b1f24; --muted:#57606a; --accent:#3b6fd8; --line:#d0d7de; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0d1117; --fg:#e3e6ea; --muted:#a9b2bd; --accent:#6fb3ff; --line:#30363d; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:1.8rem; margin:0 0 4px; } h2 { font-size:1.2rem; margin-top:2rem; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  .muted { color:var(--muted); } a { color:var(--accent); } li { margin:4px 0; }
+  nav a { margin-right:12px; }
+
+  .top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px; }
+  .lang { display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 12px 0 10px; border-radius:999px; border:1px solid var(--line); background:transparent; font:600 14px system-ui,sans-serif; color:var(--fg); cursor:pointer; }
+  .lang img { width:22px; height:auto; border-radius:3px; } .lang .cv { opacity:.6; font-size:11px; }
+  .zh { display:inline-flex; width:22px; height:16px; border-radius:3px; background:var(--line); align-items:center; justify-content:center; font:700 10px sans-serif; }
+  .note { border-left:3px solid var(--accent); padding:4px 12px; color:var(--muted); }
+  dialog.langs { border:0; padding:0; background:transparent; color:inherit; max-width:none; max-height:none; width:100%; height:100%; }
+  dialog.langs::backdrop { background:rgba(0,0,0,.55); }
+  .sheet { position:fixed; left:50%; top:60px; transform:translateX(-50%); width:min(560px,94vw); max-height:84vh; overflow:auto; background:var(--bg); border:1px solid var(--line); border-radius:20px; padding:16px 18px 22px; }
+  .grab { display:none; } .sheet h3 { margin:0 0 4px; font-size:1.2rem; }
+  .rg { font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:14px 0 8px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .it { display:flex; flex-direction:column; align-items:center; gap:5px; padding:9px 2px; border-radius:12px; border:1px solid transparent; font-size:12px; font-weight:600; color:var(--fg); text-align:center; line-height:1.15; text-decoration:none; }
+  .it:hover { background:var(--line); } .it img { width:32px; height:auto; border-radius:4px; } .it .zh { width:32px; height:23px; font-size:13px; }
+  .it.on { border-color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="./">กลับไปที่เว็บไซต์</a><button class="lang" type="button" onclick="document.getElementById('langs').showModal()" aria-haspopup="dialog"><img src="../assets/banderas/th.png" alt="" width="32" height="24">ไทย<span class="cv">▼</span></button></div>
+<h1>นโยบายความเป็นส่วนตัวของ Platinum Hunter</h1>
+<p class="muted">อัปเดตล่าสุด: 22 ตุลาคม 2569</p>
+<p class="note">นโยบายนี้จัดทำขึ้นเป็นภาษาสเปน หากฉบับแปลมีความแตกต่างกัน ให้ถือฉบับภาษาสเปนเป็นหลัก</p>
+
+<h2>1. ผู้ควบคุมข้อมูลส่วนบุคคล</h2>
+<p><strong>NXplosion Labs</strong> (Duk3X) นักพัฒนาอิสระที่มีภูมิลำเนาในประเทศสเปน<br>
+ติดต่อ: <a href="mailto:duk3x.dev@gmail.com">duk3x.dev@gmail.com</a></p>
+
+<h2>2. แอปทำอะไรบ้าง</h2>
+<p>Platinum Hunter แสดงถ้วยรางวัลจากบัญชี PlayStation Network ของคุณ การทำงานส่วนใหญ่เกิดขึ้นบนอุปกรณ์ของคุณเท่านั้น
+ซึ่งสื่อสารกับเซิร์ฟเวอร์ของ Sony ฟีเจอร์ชุมชน (เลเวล Hunter และอันดับ เพื่อน แชท กลุ่ม
+เคล็ดลับ การให้คะแนน และการสำรองข้อมูลบนคลาวด์) ใช้เซิร์ฟเวอร์ของเรา ซึ่งโฮสต์บน Google Firebase (Google Cloud ภูมิภาคสหภาพยุโรป ประเทศเบลเยียม)
+และจะเปิดใช้งานเฉพาะเมื่อคุณยืนยันบัญชีในแอปเท่านั้น</p>
+
+<h2>3. ข้อมูลที่อยู่บนอุปกรณ์ของคุณ</h2>
+<ul>
+  <li><strong>ข้อมูลเข้าสู่ระบบ PSN:</strong> ชื่อผู้ใช้และรหัสผ่านของคุณจะกรอกในหน้าเว็บทางการของ Sony เท่านั้น แอปไม่เคยเห็นหรือเก็บข้อมูลเหล่านี้</li>
+  <li><strong>เซสชัน PSN:</strong> โทเค็นเซสชันถูกเก็บแบบเข้ารหัสไว้ในอุปกรณ์ของคุณ ด้วยคีย์ที่ได้รับการปกป้องโดยที่เก็บคีย์ของ Android (Android Keystore) เพื่อให้คุณยังคงอยู่ในระบบ</li>
+  <li><strong>แคชถ้วยรางวัลและเกม การตั้งค่า และไฟล์ส่งออก:</strong> เก็บไว้ในอุปกรณ์ของคุณ ไฟล์ที่คุณส่งออกจะไปอยู่ในที่ที่คุณเลือก</li>
+  <li><strong>ข้อความ PlayStation:</strong> แอปอ่านและส่งข้อความ PSN ของคุณกับ Sony โดยตรงจากอุปกรณ์ของคุณ โดยไม่ผ่านเซิร์ฟเวอร์ของเรา ข้อมูลว่าคุณอ่านแชทใดแล้วจะเก็บไว้ในอุปกรณ์ของคุณเท่านั้น</li>
+  <li><strong>การตรวจสอบเบื้องหลัง:</strong> หากคุณเปิดการแจ้งเตือน อุปกรณ์จะตรวจสอบถ้วยรางวัลของคุณกับ Sony (ทุก ๆ ไม่กี่ชั่วโมง) และกล่องข้อความ PSN ของคุณ (ทุก 15 นาที) แล้วแจ้งคุณด้วยการแจ้งเตือนภายในเครื่อง คุณปิดได้ที่ โปรไฟล์ › การแจ้งเตือน</li>
+  <li><strong>คะแนนจากนักวิจารณ์:</strong> สัปดาห์ละครั้ง แอปจะดาวน์โหลดรายการคะแนน OpenCritic สาธารณะที่ได้มาจาก Wikidata จากเว็บไซต์ของเรา โดยไม่ส่งข้อมูลใด ๆ ของคุณ</li>
+  <li><strong>วิดเจ็ตและทางลัด:</strong> แสดงข้อมูลที่มีอยู่แล้วในอุปกรณ์ของคุณ (เลเวล แพลทินัม ถ้วยรางวัลล่าสุด และเกมที่คุณกำลังเล่น)</li>
+</ul>
+
+<h2>4. ข้อมูลที่เซิร์ฟเวอร์ของเราประมวลผล</h2>
+<p>เฉพาะเมื่อคุณยืนยันบัญชี (หน้าหลัก › เลเวล Hunter):</p>
+<ul>
+  <li><strong>การยืนยันและเลเวล Hunter:</strong> แอปส่งโทเค็นเซสชัน PSN ของคุณไปยังเซิร์ฟเวอร์ผ่าน HTTPS โทเค็นจะถูกใช้ในขณะนั้นเพื่อยืนยันว่าบัญชีเป็นของคุณและอ่านถ้วยรางวัลของคุณจาก Sony และ<strong>จะไม่ถูกเก็บไว้</strong>
+  จากถ้วยรางวัลเหล่านั้น ระบบจะเก็บ Online ID อวาตาร์ ประเทศของบัญชี PSN คะแนน เลเวล และจำนวนถ้วยรางวัลของคุณ ความคืบหน้าของแต่ละเกม จำนวนชั่วโมงที่แอปคำนวณว่าคุณใช้ไปกับแต่ละแพลทินัม (ใช้เฉพาะสำหรับค่าเฉลี่ย “แพลทินัมใน” โดยไม่แสดงว่าเป็นใคร) และสัญญาณสำหรับตรวจจับถ้วยรางวัลที่เป็นไปไม่ได้ (เช่น หลายร้อยใบในวินาทีเดียวกัน)</li>
+  <li><strong>แคตตาล็อกสาธารณะ:</strong> ชื่อ ไอคอน และความหายากของถ้วยรางวัลในแต่ละเกม ซึ่งไม่ได้ระบุตัวบุคคลใด</li>
+  <li><strong>สิ่งที่คุณเผยแพร่:</strong> เคล็ดลับ โหวต การให้คะแนนเกม (ความยาก ชั่วโมง และคะแนน) รีวิว โหวต “ไม่สามารถรับได้อีกแล้ว” ข้อความแชทและกลุ่ม กลุ่มที่คุณสร้างหรือเข้าร่วม และคำเชิญ</li>
+  <li><strong>ความปลอดภัยของชุมชน:</strong> รายงานที่คุณส่งหรือได้รับ และบุคคลที่คุณบล็อก</li>
+  <li><strong>การแจ้งเตือน:</strong> ตัวระบุการแจ้งเตือนของ Firebase Cloud Messaging เพื่อส่งการแจ้งเตือนแชทและกลุ่มให้คุณ หากคุณเปิดใช้งาน</li>
+  <li><strong>การสำรองข้อมูลบนคลาวด์:</strong> รายการล่าของคุณ วิชลิสต์ ถ้วยรางวัลที่คุณทำเครื่องหมายว่าไม่สามารถรับได้ และการตั้งค่าหน้าตาแอป เพื่อกู้คืนเมื่อคุณเปลี่ยนมือถือ</li>
+</ul>
+<p>Online ID อวาตาร์ เลเวล คะแนน และประเทศของคุณ ผู้ใช้อื่นจะมองเห็นได้ในอันดับและในชุมชน ส่วนข้อความแชทของคุณจะเห็นได้เฉพาะคนในแชทหรือกลุ่มนั้นเท่านั้น</p>
+
+<h2>5. โฆษณา (Google AdMob)</h2>
+<p>เวอร์ชันฟรีแสดงโฆษณาจาก Google AdMob โดย Google อาจเก็บรวบรวมตัวระบุโฆษณาของอุปกรณ์
+ที่อยู่ IP (ตำแหน่งโดยประมาณ) ข้อมูลอุปกรณ์ และข้อมูลการโต้ตอบกับโฆษณา เพื่อแสดงโฆษณา
+วัดผล และป้องกันการฉ้อโกง ในเขตเศรษฐกิจยุโรป สหราชอาณาจักร และสวิตเซอร์แลนด์ แอปจะขอความยินยอมจากคุณก่อน
+แสดงโฆษณาที่ปรับให้เหมาะกับคุณ และคุณเปลี่ยนได้ทุกเมื่อจากเมนู <em>ความเป็นส่วนตัวและโฆษณา</em>
+ข้อมูลเพิ่มเติม: <a href="https://policies.google.com/technologies/partner-sites">วิธีที่ Google ใช้ข้อมูล</a>
+คุณสามารถรีเซ็ตหรือลบตัวระบุโฆษณาได้ในการตั้งค่า Android</p>
+
+<h2>6. รายงานข้อขัดข้อง (Firebase Crashlytics)</h2>
+<p>หากแอปปิดตัวลงเพราะข้อผิดพลาด แอปจะส่งรายงานไปยัง Firebase Crashlytics เพื่อให้เราแก้ไขได้ ได้แก่ รุ่นโทรศัพท์ เวอร์ชัน Android และเวอร์ชันแอป เวลาที่เกิดข้อขัดข้อง ส่วนของโค้ดที่เกิดปัญหา และตัวระบุการติดตั้งแบบสุ่ม รายงานนี้ไม่มีบัญชี PSN ถ้วยรางวัล หรือข้อความของคุณ และจะเก็บไว้ไม่เกิน 90 วัน</p>
+
+<h2>7. การซื้อ</h2>
+<p>การซื้อและการสมัครสมาชิก Premium ดำเนินการโดย Google Play เราไม่ได้รับข้อมูลการชำระเงินของคุณ</p>
+
+<h2>8. ฐานทางกฎหมาย</h2>
+<ul>
+  <li>การให้บริการตามที่คุณร้องขอ: แสดงถ้วยรางวัลของคุณ และฟีเจอร์ชุมชนหากคุณยืนยันบัญชี</li>
+  <li>ประโยชน์โดยชอบด้วยกฎหมายในการรักษาชุมชนให้ปลอดภัยและอันดับให้ยุติธรรม (การตรวจจับการโกง การรายงาน และการบล็อก)</li>
+  <li>ความยินยอมของคุณสำหรับโฆษณาที่ปรับให้เหมาะกับคุณและการแจ้งเตือน (เพิกถอนได้ทุกเมื่อ)</li>
+</ul>
+
+<h2>9. การเก็บรักษาและการลบข้อมูล</h2>
+<p>ข้อมูลบนเซิร์ฟเวอร์จะถูกเก็บไว้ตราบเท่าที่คุณใช้ฟีเจอร์ชุมชน คุณลบได้ทุกเมื่อที่
+<em>โปรไฟล์ › ลบข้อมูลของฉันจากเซิร์ฟเวอร์</em> โดยระบบจะลบอันดับ ความคืบหน้า การสำรองข้อมูลบนคลาวด์ รายการบล็อก และบัญชีของคุณบนเซิร์ฟเวอร์
+ส่วนสิ่งที่คุณเขียนไว้ในกลุ่ม แชท เคล็ดลับ และรีวิว จะกลายเป็นแบบไม่ระบุชื่อและถูกซ่อน คุณยังสามารถขอให้ลบทางอีเมลได้ด้วย
+เมื่อออกจากระบบ โทเค็นและแคชในอุปกรณ์จะถูกลบ และการถอนการติดตั้งแอปจะลบข้อมูลภายในเครื่องทั้งหมดของแอป</p>
+
+<h2>10. ผู้ประมวลผลข้อมูลและการโอนข้อมูล</h2>
+<p>เราใช้ Google (Firebase, Cloud Functions, Cloud Messaging, Crashlytics, AdMob และ Google Play) เป็นผู้ประมวลผลข้อมูลส่วนบุคคล ข้อมูลบนเซิร์ฟเวอร์จัดเก็บในสหภาพยุโรป
+Google อาจประมวลผลข้อมูลบางส่วนนอกสหภาพยุโรป โดยมีการคุ้มครองตามข้อสัญญามาตรฐาน (Standard Contractual Clauses) ของคณะกรรมาธิการยุโรป</p>
+
+<h2>11. ผู้เยาว์</h2>
+<p>แอปนี้ไม่ได้มุ่งเป้าไปที่ผู้ที่มีอายุต่ำกว่า 16 ปี</p>
+
+<h2>12. สิทธิของคุณ</h2>
+<p>คุณสามารถใช้สิทธิในการเข้าถึง การแก้ไข การลบ การคัดค้าน การจำกัดการประมวลผล และการโอนย้ายข้อมูล โดยเขียนถึง
+<a href="mailto:duk3x.dev@gmail.com">duk3x.dev@gmail.com</a> และสามารถร้องเรียนต่อหน่วยงานคุ้มครองข้อมูลแห่งสเปน (Agencia Española de Protección de Datos, <a href="https://www.aepd.es">aepd.es</a>)</p>
+
+<h2>13. ประกาศ</h2>
+<p>Platinum Hunter เป็นแอปอิสระของ NXplosion Labs ไม่มีส่วนเกี่ยวข้อง ไม่ได้รับการสนับสนุน และไม่ได้รับการรับรองจาก Sony Interactive Entertainment
+PlayStation, PlayStation Network, PS5, PS4, PS3 และ PS Vita เป็นเครื่องหมายการค้าจดทะเบียนของ Sony Interactive Entertainment Inc. ชื่อและภาพของเกมและถ้วยรางวัลเป็นของเจ้าของแต่ละราย</p>
+</main>
+<dialog class="langs" id="langs" onclick="if(event.target===this)this.close()"><div class="sheet"><div class="grab"></div><h3>ภาษา</h3><div class="rg">ยุโรป</div><div class="grid"><a class="it" href="../privacy.html" hreflang="es" lang="es" data-lang="es"><img src="../assets/banderas/es.png" alt="" width="32" height="24">Español</a><a class="it" href="../en/privacy.html" hreflang="en" lang="en" data-lang="en"><img src="../assets/banderas/en.png" alt="" width="32" height="24">English</a><a class="it" href="../fr/privacy.html" hreflang="fr" lang="fr" data-lang="fr"><img src="../assets/banderas/fr.png" alt="" width="32" height="24">Français</a><a class="it" href="../de/privacy.html" hreflang="de" lang="de" data-lang="de"><img src="../assets/banderas/de.png" alt="" width="32" height="24">Deutsch</a><a class="it" href="../it/privacy.html" hreflang="it" lang="it" data-lang="it"><img src="../assets/banderas/it.png" alt="" width="32" height="24">Italiano</a><a class="it" href="../pt-pt/privacy.html" hreflang="pt-PT" lang="pt-PT" data-lang="pt-pt"><img src="../assets/banderas/pt-PT.png" alt="" width="32" height="24">Português</a><a class="it" href="../nl/privacy.html" hreflang="nl" lang="nl" data-lang="nl"><img src="../assets/banderas/nl.png" alt="" width="32" height="24">Nederlands</a><a class="it" href="../pl/privacy.html" hreflang="pl" lang="pl" data-lang="pl"><img src="../assets/banderas/pl.png" alt="" width="32" height="24">Polski</a><a class="it" href="../ru/privacy.html" hreflang="ru" lang="ru" data-lang="ru"><img src="../assets/banderas/ru.png" alt="" width="32" height="24">Русский</a><a class="it" href="../uk/privacy.html" hreflang="uk" lang="uk" data-lang="uk"><img src="../assets/banderas/uk.png" alt="" width="32" height="24">Українська</a><a class="it" href="../tr/privacy.html" hreflang="tr" lang="tr" data-lang="tr"><img src="../assets/banderas/tr.png" alt="" width="32" height="24">Türkçe</a></div><div class="rg">อเมริกา</div><div class="grid"><a class="it" href="../es-419/privacy.html" hreflang="es-419" lang="es-419" data-lang="es-419"><img src="../assets/banderas/es-419.png" alt="" width="32" height="24">Español (Latinoamérica)</a><a class="it" href="../pt-br/privacy.html" hreflang="pt-BR" lang="pt-BR" data-lang="pt-br"><img src="../assets/banderas/pt-BR.png" alt="" width="32" height="24">Português (Brasil)</a></div><div class="rg">เอเชียและตะวันออกกลาง</div><div class="grid"><a class="it" href="../ja/privacy.html" hreflang="ja" lang="ja" data-lang="ja"><img src="../assets/banderas/ja.png" alt="" width="32" height="24">日本語</a><a class="it" href="../ko/privacy.html" hreflang="ko" lang="ko" data-lang="ko"><img src="../assets/banderas/ko.png" alt="" width="32" height="24">한국어</a><a class="it" href="../zh-hans/privacy.html" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh-hans"><img src="../assets/banderas/zh-Hans.png" alt="" width="32" height="24">简体中文</a><a class="it" href="../zh-hant/privacy.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh-hant"><span class="zh">繁</span>繁體中文</a><a class="it" href="../hi/privacy.html" hreflang="hi" lang="hi" data-lang="hi"><img src="../assets/banderas/hi.png" alt="" width="32" height="24">हिन्दी</a><a class="it" href="../id/privacy.html" hreflang="id" lang="id" data-lang="id"><img src="../assets/banderas/id.png" alt="" width="32" height="24">Bahasa Indonesia</a><a class="it on" href="../th/privacy.html" hreflang="th" lang="th" data-lang="th"><img src="../assets/banderas/th.png" alt="" width="32" height="24">ไทย</a><a class="it" href="../vi/privacy.html" hreflang="vi" lang="vi" data-lang="vi"><img src="../assets/banderas/vi.png" alt="" width="32" height="24">Tiếng Việt</a><a class="it" href="../ar/privacy.html" hreflang="ar" lang="ar" data-lang="ar"><img src="../assets/banderas/ar.png" alt="" width="32" height="24">العربية</a></div></div></dialog><script>(function(){document.querySelectorAll('#langs a[data-lang]').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('nx-lang',a.dataset.lang)}catch(e){}})});})();</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="{{html_lang}}" dir="{{dir}}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{title}}</title><meta name="description" content="{{description}}">
+<meta property="og:title" content="{{title}}"><meta property="og:description" content="{{description}}"><meta property="og:image" content="https://nxplosion-lab.github.io/assets/nxplosion-labs.png">
+<link rel="icon" href="{{base}}assets/favicon.png"><link rel="canonical" href="{{canonical}}">{{alternates}}
+<style>@font-face{font-family:Sora;font-weight:800;font-display:swap;src:url({{base}}assets/sora_extrabold.ttf)}@font-face{font-family:Sora;font-weight:700;font-display:swap;src:url({{base}}assets/sora_bold.ttf)}
+@font-face{font-family:DM;font-weight:400;font-display:swap;src:url({{base}}assets/dmsans_regular.ttf)}@font-face{font-family:DM;font-weight:600;font-display:swap;src:url({{base}}assets/dmsans_semibold.ttf)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:DM,system-ui,sans-serif;line-height:1.55;background:#07080b;color:#f2f2f4;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+header img{height:34px;width:auto}
+nav{display:flex;gap:22px;font-weight:600;font-size:15px}nav a:hover{color:#fe4f01}
+h1{font:800 clamp(40px,8vw,76px)/1.02 Sora,sans-serif;letter-spacing:-.02em}h1 em{font-style:normal;color:#fe4f01}
+h2{font:800 clamp(30px,5vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.01em}
+.tag{display:inline-block;font:600 13px DM,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#fe4f01}
+.lead{font-size:clamp(17px,2.2vw,20px);max-width:560px;color:#b8bcc6}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 16px Sora,sans-serif;border-radius:999px;padding:15px 26px;background:#fe4f01;color:#fff;box-shadow:0 10px 30px rgba(254,79,1,.35);transition:transform .15s}.btn:hover{transform:translateY(-2px)}
+.hero{position:relative;padding:70px 0 90px;overflow:hidden}
+.hero:before{content:"";position:absolute;right:-12%;top:-10%;width:70%;height:130%;background:linear-gradient(115deg,transparent 40%,rgba(254,79,1,.9) 40.2%,#fe4f01 52%,transparent 52.2%,transparent 58%,rgba(254,79,1,.35) 58.2%,rgba(254,79,1,.35) 61%,transparent 61.2%)}
+.hero .sym{position:absolute;right:4%;top:50%;transform:translateY(-50%);width:min(38%,380px);height:auto;filter:drop-shadow(8px 8px 0 #07080b) drop-shadow(-4px -4px 0 #07080b) drop-shadow(0 0 40px rgba(254,79,1,.45))}
+.hero .in{position:relative;max-width:620px}.hero .lead{margin:22px 0 30px}
+section.app{padding:80px 0;border-top:1px solid #1b1d24}
+.apphead{display:flex;gap:18px;align-items:center;margin:14px 0 10px}.apphead img{width:76px;height:76px;border-radius:20px}
+.slogan{font:800 22px Sora,sans-serif}.slogan span{color:#ff5a5a}
+.phones{display:flex;gap:16px;justify-content:center;margin-top:40px}
+.phone{width:min(31%,250px);aspect-ratio:9/19;border-radius:28px;overflow:hidden;background:#000;border:2px solid #23262f;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.phone img{width:100%;height:100%;object-fit:cover;object-position:top}
+.phone.mid{transform:translateY(-18px);border-color:#fe4f01;box-shadow:0 20px 60px rgba(254,79,1,.25)}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:36px}
+.feat{border-radius:20px;padding:20px;background:#111318;border:1px solid #20232c}.feat b{display:block;font:700 18px Sora,sans-serif;margin-bottom:4px}.feat p{color:#9aa0ab}
+.play{display:inline-flex;align-items:center;gap:10px;font:700 16px Sora,sans-serif;border-radius:999px;padding:15px 26px;background:#fff;color:#07080b;margin-top:30px}
+footer{border-top:1px solid #1b1d24;color:#8b909b;padding:40px 0 50px;font-size:14px}footer img{height:28px;width:auto}
+footer .links{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0}footer .links a{color:#e6e7ea}footer .links a:hover{color:#fe4f01}
+@media(max-width:700px){nav{display:none}.hero .sym{position:static;transform:none;width:58%;margin:0 0 26px}.hero:before{width:110%;right:-55%;top:-4%;height:36%;opacity:.75}.hero{padding:30px 0 60px}.phone{border-radius:20px}}
+header .right{display:flex;align-items:center;gap:22px}
+.lang{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 12px 0 10px;border-radius:999px;border:1px solid #2a2d36;background:#111318;font:600 14px DM,sans-serif;color:#e6e7ea;cursor:pointer}
+.lang:hover{border-color:#fe4f01}.lang img{width:22px;height:auto;border-radius:3px}.lang .cv{opacity:.6;font-size:11px}
+.zh{display:inline-flex;width:22px;height:16px;border-radius:3px;background:#2a2d36;align-items:center;justify-content:center;font:700 10px sans-serif;color:#fff}
+dialog.langs{border:0;padding:0;background:transparent;color:inherit;max-width:none;max-height:none;width:100%;height:100%}
+dialog.langs::backdrop{background:rgba(0,0,0,.6)}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-height:88vh;overflow:auto;background:#111318;border-top:1px solid #262933;border-radius:24px 24px 0 0;padding:10px 18px 24px}
+.grab{width:40px;height:4px;border-radius:2px;background:#3a3d47;margin:0 auto 14px}
+.sheet h3{font:800 20px Sora,sans-serif;margin-bottom:4px}
+.rg{font:600 11px DM,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#fe4f01;margin:14px 0 8px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.it{display:flex;flex-direction:column;align-items:center;gap:5px;padding:9px 2px;border-radius:14px;border:1px solid transparent;font:600 11.5px DM,sans-serif;color:#d8dae0;text-align:center;line-height:1.15}
+.it:hover{background:#1a1d24}.it img{width:32px;height:auto;border-radius:4px}.it .zh{width:32px;height:23px;font-size:13px}
+.it.on{background:rgba(254,79,1,.14);border-color:#fe4f01}
+@media(min-width:701px){.sheet{left:50%;right:auto;bottom:auto;top:80px;transform:translateX(-50%);width:560px;border:1px solid #262933;border-radius:24px}.grab{display:none}.grid{grid-template-columns:repeat(5,1fr)}}
+[dir=rtl] .hero:before{right:auto;left:-12%;transform:scaleX(-1)}
+[dir=rtl] .hero .sym{right:auto;left:4%}
+@media(max-width:700px){[dir=rtl] .hero:before{left:-55%}}
+html[lang=vi] body,html[lang=vi] h1,html[lang=vi] h2,html[lang=vi] .btn,html[lang=vi] .play,html[lang=vi] .slogan,html[lang=vi] .feat b{font-family:system-ui,sans-serif}
+</style></head><body>
+<div class="wrap"><header><a href="{{home}}"><img src="{{base}}assets/nxplosion-labs.png" alt="NXplosion Labs" width="148" height="34"></a><div class="right"><nav><a href="#app">{{nav_apps}}</a><a href="mailto:duk3x.dev@gmail.com">{{nav_contact}}</a></nav>{{picker}}</div></header></div>
+<section class="hero"><div class="wrap"><img class="sym" src="{{base}}assets/nx.png" alt=""><div class="in"><span class="tag">{{tag_studio}}</span><h1 style="margin-top:14px">{{hero_title}}</h1><p class="lead">{{hero_lead}}</p><a class="btn" href="#app">{{hero_button}}</a></div></div></section>
+<section class="app" id="app"><div class="wrap"><span class="tag">{{tag_app}}</span>
+<div class="apphead"><img src="{{base}}assets/platinum-hunter.png" alt="Platinum Hunter"><div><h2>Platinum Hunter</h2><div class="slogan">{{slogan_1}} <span>{{slogan_2}}</span></div></div></div>
+<p class="lead">{{app_lead}}</p>
+<div class="phones"><div class="phone"><img src="{{base}}assets/caza.jpg" alt="{{alt_hunt}}" loading="lazy"></div><div class="phone mid"><img src="{{base}}assets/perfil.jpg" alt="{{alt_profile}}" loading="lazy"></div><div class="phone"><img src="{{base}}assets/entrada.jpg" alt="{{alt_entry}}" loading="lazy"></div></div>
+<div class="feats"><div class="feat"><b>{{feat1_title}}</b><p>{{feat1_text}}</p></div><div class="feat"><b>{{feat2_title}}</b><p>{{feat2_text}}</p></div><div class="feat"><b>{{feat3_title}}</b><p>{{feat3_text}}</p></div><div class="feat"><b>{{feat4_title}}</b><p>{{feat4_text}}</p></div></div><span class="play">▶ {{play_soon}}</span></div></section>
+<footer><div class="wrap"><img src="{{base}}assets/nxplosion-labs.png" alt="NXplosion Labs" width="122" height="28">
+<div class="links"><a href="mailto:duk3x.dev@gmail.com">{{footer_contact}} · duk3x.dev@gmail.com</a><a href="{{privacy}}">{{footer_privacy}}</a></div>
+<p>{{footer_copy}}<br>{{footer_disclaimer}}</p></div></footer>
+{{dialog}}{{script}}
+</body></html>
