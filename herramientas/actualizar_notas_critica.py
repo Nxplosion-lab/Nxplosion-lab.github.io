@@ -40,6 +40,7 @@ def main():
     if len(salida["juegos"]) < 1000:
         sys.exit(f"Muy pocos juegos ({len(salida['juegos'])}): no se sobrescribe la lista")
     destino = pathlib.Path(__file__).resolve().parent.parent / "datos" / "notas-critica.json"
+    destino.parent.mkdir(parents=True, exist_ok=True)
     destino.write_text(json.dumps(salida, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     print(f"{len(salida['juegos'])} juegos con nota guardados en {destino.name}")
 
