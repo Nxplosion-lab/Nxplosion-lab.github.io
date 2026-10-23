@@ -22,8 +22,11 @@ h2{font:800 clamp(30px,5vw,48px)/1.08 Sora,sans-serif;letter-spacing:-.01em}
 .top .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#07080b 0%,#07080b 50%,rgba(7,8,11,.6) 58%,rgba(7,8,11,0) 74%),linear-gradient(0deg,#07080b 0%,rgba(7,8,11,0) 18%),linear-gradient(180deg,rgba(7,8,11,.7) 0%,rgba(7,8,11,0) 14%)}
 .top header{position:relative;z-index:2}
 .hero{position:relative;z-index:1;padding:70px 0 110px}.hero .in{max-width:560px}.hero h1{margin-top:16px}.hero .lead{margin:22px 0 30px}
-section.app{padding:80px 0;border-top:1px solid #1b1d24}
-.apphead{display:flex;gap:18px;align-items:center;margin:14px 0 10px}.apphead img{width:76px;height:76px;border-radius:20px}
+section.app{position:relative;overflow:hidden;padding:80px 0;border-top:1px solid #1b1d24}
+section.app>.wrap{position:relative;z-index:1}
+.appbg{position:absolute;top:0;right:0;width:62%;height:820px;background:url(../assets/ph-escena.jpg) right top/auto 100% no-repeat;-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 38%),linear-gradient(0deg,transparent 0%,#000 30%);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0%,#000 38%),linear-gradient(0deg,transparent 0%,#000 30%);mask-composite:intersect;opacity:.9}
+.phlogo{width:min(340px,70vw);height:auto;display:block;margin:-6px 0 2px -6px}
+.apphead{display:flex;gap:18px;align-items:center;margin:14px 0 10px}.apphead>img{width:76px;height:76px;border-radius:20px;flex:none}
 .slogan{font:800 22px Sora,sans-serif}.slogan span{color:#ff5a5a}
 .phones{display:flex;gap:18px;justify-content:center;margin-top:46px}
 .phone{width:min(31%,250px);aspect-ratio:9/19;border-radius:28px;overflow:hidden;background:#000;border:2px solid #23262f;box-shadow:0 20px 50px rgba(0,0,0,.6)}
@@ -35,7 +38,7 @@ section.app{padding:80px 0;border-top:1px solid #1b1d24}
 .soon{display:flex;align-items:center;gap:10px;margin-top:20px;font-weight:600;font-size:14.5px;color:#d8dae0}.soon i{width:8px;height:8px;border-radius:4px;background:#fe5a1f;box-shadow:0 0 10px #fe5a1f;flex:none}
 footer{border-top:1px solid #1b1d24;color:#8b909b;padding:40px 0 50px;font-size:14px}footer img{height:28px;width:auto}
 footer .links{display:flex;gap:18px;flex-wrap:wrap;margin:12px 0}footer .links a{color:#e6e7ea}footer .links a:hover{color:#fe4f01}
-@media(max-width:700px){nav{display:none}.top{min-height:0}.top .bg{background-position:center top;background-size:100% auto}.top .bg:after{background:linear-gradient(180deg,rgba(7,8,11,.55) 0px,rgba(7,8,11,0) 90px,rgba(7,8,11,0) 260px,#07080b 400px)}.hero{padding:300px 0 50px}.feats{grid-template-columns:1fr}.phone{border-radius:18px}}
+@media(max-width:700px){.appbg{width:100%;height:440px;background-position:center top;background-size:100% auto;-webkit-mask-image:linear-gradient(0deg,transparent 0%,#000 55%);mask-image:linear-gradient(0deg,transparent 0%,#000 55%)}section.app{padding-top:330px}.apphead>img{width:60px;height:60px}.phlogo{width:min(300px,64vw)}nav{display:none}.top{min-height:0}.top .bg{background-position:center top;background-size:100% auto}.top .bg:after{background:linear-gradient(180deg,rgba(7,8,11,.55) 0px,rgba(7,8,11,0) 90px,rgba(7,8,11,0) 260px,#07080b 400px)}.hero{padding:300px 0 50px}.feats{grid-template-columns:1fr}.phone{border-radius:18px}}
 header .right{display:flex;align-items:center;gap:22px}
 .lang{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 12px 0 10px;border-radius:999px;border:1px solid #2a2d36;background:#111318;font:600 14px DM,sans-serif;color:#e6e7ea;cursor:pointer}
 .lang:hover{border-color:#fe4f01}.lang img{width:22px;height:auto;border-radius:3px}.lang .cv{opacity:.6;font-size:11px}
@@ -52,15 +55,16 @@ dialog.langs::backdrop{background:rgba(0,0,0,.6)}
 .it.on{background:rgba(254,79,1,.14);border-color:#fe4f01}
 @media(min-width:701px){.sheet{left:50%;right:auto;bottom:auto;top:80px;transform:translateX(-50%);width:560px;border:1px solid #262933;border-radius:24px}.grab{display:none}.grid{grid-template-columns:repeat(5,1fr)}}
 [dir=rtl] .top .bg{background-position:left center}
+[dir=rtl] .appbg{right:auto;left:0;background-position:left top;-webkit-mask-image:linear-gradient(270deg,transparent 0%,#000 38%),linear-gradient(0deg,transparent 0%,#000 30%);mask-image:linear-gradient(270deg,transparent 0%,#000 38%),linear-gradient(0deg,transparent 0%,#000 30%)}
 [dir=rtl] .top .bg:after{background:linear-gradient(270deg,#07080b 0%,#07080b 50%,rgba(7,8,11,.6) 58%,rgba(7,8,11,0) 74%),linear-gradient(0deg,#07080b 0%,rgba(7,8,11,0) 18%),linear-gradient(180deg,rgba(7,8,11,.7) 0%,rgba(7,8,11,0) 14%)}
-@media(max-width:700px){[dir=rtl] .top .bg{background-position:center top}[dir=rtl] .top .bg:after{background:linear-gradient(180deg,rgba(7,8,11,.55) 0px,rgba(7,8,11,0) 90px,rgba(7,8,11,0) 260px,#07080b 400px)}}
+@media(max-width:700px){[dir=rtl] .appbg{left:0;background-position:center top;-webkit-mask-image:linear-gradient(0deg,transparent 0%,#000 55%);mask-image:linear-gradient(0deg,transparent 0%,#000 55%)}[dir=rtl] .top .bg{background-position:center top}[dir=rtl] .top .bg:after{background:linear-gradient(180deg,rgba(7,8,11,.55) 0px,rgba(7,8,11,0) 90px,rgba(7,8,11,0) 260px,#07080b 400px)}}
 html[lang=vi] body,html[lang=vi] h1,html[lang=vi] h2,html[lang=vi] .btn,html[lang=vi] .soon,html[lang=vi] .slogan,html[lang=vi] .feat b{font-family:system-ui,sans-serif}
 </style></head><body>
 <div class="top"><div class="bg"></div>
 <div class="wrap"><header><a href="./"><img src="../assets/nxplosion-labs.png" alt="NXplosion Labs" width="148" height="34"></a><div class="right"><nav><a href="#app">App</a><a href="mailto:duk3x.dev@gmail.com">聯絡我們</a></nav><button class="lang" type="button" onclick="document.getElementById('langs').showModal()" aria-haspopup="dialog"><span class="zh">繁</span>繁體中文<span class="cv">▼</span></button></div></header></div>
 <section class="hero"><div class="wrap"><div class="in"><span class="tag">應用程式與遊戲</span><h1>創意獨立，<br><em>技術雄心。</em></h1><p class="lead">一間開發應用程式與遊戲的工作室。我們打造 Platinum Hunter，幫你整理 PlayStation 獎盃收藏。</p><a class="btn" href="#app">查看 Platinum Hunter →</a></div></div></section></div>
-<section class="app" id="app"><div class="wrap"><span class="tag">我們的 App</span>
-<div class="apphead"><img src="../assets/platinum-hunter.png" alt="Platinum Hunter"><div><h2>Platinum Hunter</h2><div class="slogan">不在於有多少， <span>而在於是哪些。</span></div></div></div>
+<section class="app" id="app"><div class="appbg"></div><div class="wrap"><span class="tag">我們的 App</span>
+<div class="apphead"><img src="../assets/platinum-hunter.png" alt=""><div><h2><img class="phlogo" src="../assets/logo-platinum-hunter.webp" alt="Platinum Hunter" width="600" height="237"></h2><div class="slogan">不在於有多少， <span>而在於是哪些。</span></div></div></div>
 <p class="lead">在 Android 上查看你的 PlayStation 獎盃，追蹤每款遊戲的進度，規劃下一個白金。</p>
 <div class="soon"><i></i>即將在 Google Play 推出</div>
 <div class="phones"><div class="phone"><img src="../assets/caza.jpg" alt="狩獵模式" loading="lazy"></div><div class="phone mid"><img src="../assets/perfil.jpg" alt="個人檔案" loading="lazy"></div><div class="phone"><img src="../assets/entrada.jpg" alt="開始畫面" loading="lazy"></div></div>
