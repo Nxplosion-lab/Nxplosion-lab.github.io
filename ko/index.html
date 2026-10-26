@@ -75,13 +75,14 @@ html.cine-on{overflow:hidden}
 .cine .vwrap{left:50%;top:50%;width:auto;height:100%;transform:translate(-50%,-50%)}
 @media(max-aspect-ratio:3/4){.cine .vwrap{width:max(100vw,calc(100vh * 9 / 20));height:auto}}
 .cine{cursor:pointer}
-.tap{position:absolute;left:50%;bottom:max(70px,10vh);transform:translateX(-50%);display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font:600 13px DM,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#f2f2f4;padding:0 0 10px;border-bottom:1px solid #fe4f01;animation:parpadeo 2.2s ease-in-out infinite;transition:opacity .3s}
+.tap{position:absolute;left:50%;bottom:max(70px,10vh);transform:translateX(-50%);display:inline-flex;flex-direction:column;align-items:center;gap:12px;white-space:nowrap;font:600 14px DM,sans-serif;letter-spacing:.02em;color:#f2f2f4;transition:opacity .3s}
 html[lang=ar] .tap,html[lang=hi] .tap,html[lang=th] .tap{letter-spacing:0}
-.tap svg{flex:none;width:16px;height:16px}
-.tap.hide{opacity:0;animation:none}
-@keyframes parpadeo{0%,100%{opacity:1}50%{opacity:.35}}
+.tap svg{flex:none;width:34px;height:34px;padding:19px;box-sizing:content-box;border-radius:50%;background:#fe5a1f;stroke:#130700;animation:tapon 2s ease-out infinite}
+.tap.hide{opacity:0}
+.tap.hide svg{animation:none}
+@keyframes tapon{0%{box-shadow:0 0 0 0 rgba(254,90,31,.55)}70%{box-shadow:0 0 0 18px rgba(254,90,31,0)}100%{box-shadow:0 0 0 0 rgba(254,90,31,0)}}
 .skip{position:absolute;top:18px;inset-inline-end:16px;font:600 13px DM,sans-serif;color:#d8dae0;background:rgba(7,8,11,.55);border:1px solid #2a2d36;border-radius:999px;padding:8px 14px;cursor:pointer}
-@media(prefers-reduced-motion:reduce){.cine{transition:none}.tap{animation:none}}
+@media(prefers-reduced-motion:reduce){.cine{transition:none}.tap svg{animation:none}}
 </style></head><body>
 <div class="top"><div class="bg"></div>
 <div class="wrap"><header><a href="./"><img src="../assets/nxplosion-labs.png" alt="NXplosion Labs" width="148" height="34"></a><div class="right"><nav><a href="#app">앱</a><a href="mailto:duk3x.dev@gmail.com">문의</a></nav><button class="lang" type="button" onclick="document.getElementById('langs').showModal()" aria-haspopup="dialog"><img src="../assets/banderas/ko.png" alt="" width="32" height="24">한국어<span class="cv">▼</span></button></div></header></div>

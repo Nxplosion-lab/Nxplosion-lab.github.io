@@ -76,7 +76,7 @@ for code, carpeta, *_ in gw.IDIOMAS:
     check(("nxRedirige=1" in h) == (carpeta == ""), f"{n}: solo la raíz marca que va a cambiar de idioma")
     check("prefers-reduced-motion: reduce" in h, f"{n}: respeta «reducir movimiento»")
     check("{{" not in h, f"{n}: no quedan campos sin sustituir")
-    check("animation:parpadeo 2.2s" in h and "tapon" not in h, f"{n}: aviso en la versión C elegida (texto que parpadea)")
+    check("border-radius:50%;background:#fe5a1f;stroke:#130700;animation:tapon" in h and "parpadeo" not in h, f"{n}: aviso en la versión B elegida (botón redondo naranja con el texto debajo)")
 
 # 4. Los tiempos del lema son los de Intro.kt (T_BOOM = 2,35 s; total 5,55 s; lema a +1,15 y +1,35 s)
 h = open(os.path.join(RAIZ, "index.html"), encoding="utf-8").read()
