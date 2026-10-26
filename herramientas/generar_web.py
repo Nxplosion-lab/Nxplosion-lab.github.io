@@ -134,7 +134,7 @@ def pagina(plantilla, code, carpeta, flag, html_lang, todos, tipo):
             "if(l==='pt-br')return 'pt-br';if(l.indexOf('pt')===0)return 'pt-pt';"
             "if(l.indexOf('zh')===0)return(/hant|tw|hk|mo/.test(l)?'zh-hant':'zh-hans');"
             "var b=l.split('-')[0];if(b==='in')b='id';for(var k in M){if(k.toLowerCase()===b)return M[k]}}return 'es'}"
-            "var d=elegir();if(d&&d!=='es')location.replace(d+'/'+pag);"
+            "var d=elegir();if(d&&d!=='es'){window.nxRedirige=1;location.replace(d+'/'+pag)}"
         )
     script += "})();</script>"
 
