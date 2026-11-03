@@ -1,0 +1,34 @@
+name: Vigilante de mantenimiento de las apps
+
+# Repasa cada día todos los repos de NXplosion Labs y deja el informe en un issue privado.
+# Va en este repo porque es público y aquí Actions no gasta minutos.
+# El registro de las ejecuciones es público: el script no imprime nada de los repos privados.
+# Detalle y puesta en marcha: herramientas/LEEME-VIGILANTE.md
+
+on:
+  schedule:
+    - cron: "23 5 * * *"   # cada día, 06:23 en Madrid (07:23 en verano)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: vigilante
+  cancel-in-progress: false
+
+jobs:
+  vigilar:
+    name: Repasar los repos y escribir el informe
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - name: Pruebas del vigilante
+        run: python3 herramientas/probar_vigilante.py
+      - name: Repasar y escribir el informe
+        env:
+          VIGILANTE_TOKEN: ${{ secrets.VIGILANTE_TOKEN }}
+          REPO_INFORME: ${{ secrets.REPO_INFORME }}
+          PLAY_TARGET_SDK: ${{ vars.PLAY_TARGET_SDK }}
+        run: python3 herramientas/vigilante.py
