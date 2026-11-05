@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Genera la web de NXplosion Labs en 22 idiomas a partir de dos plantillas y un archivo de textos por idioma.
+Genera la web de NXplosion Labs en 22 idiomas a partir de tres plantillas y un archivo de textos por idioma.
 
   herramientas/web/inicio.html        plantilla de la portada
   herramientas/web/privacidad.html    plantilla de la política de privacidad
+  herramientas/web/normas.html        plantilla de las normas de la comunidad de Platinum Hunter
   herramientas/web/textos/<idioma>.json
 
-El español va en la raíz (index.html y privacy.html, que es la dirección que usan la app y Google Play);
+El español va en la raíz (index.html, privacy.html y normas.html, que son las direcciones que usan la app y Google Play);
 cada otro idioma en su carpeta (en/, fr/, ja/…). También crea sitemap.xml y robots.txt.
 
   python3 herramientas/generar_web.py           escribe la web
@@ -48,7 +49,13 @@ IDIOMAS = [
     ("ar", "ar", "asia", "ar", "ar", "ar"),
 ]
 RTL = {"ar"}
-CAMPOS_HTML = {"hero_title", "privacy_html"}  # llevan etiquetas: no se escapan
+CAMPOS_HTML = {"hero_title", "privacy_html", "rules_html"}  # llevan etiquetas: no se escapan
+# tipo de página: plantilla y archivo de salida ("" en la ruta pública de la portada)
+PAGINAS = {
+    "inicio": ("inicio.html", "index.html", ""),
+    "privacidad": ("privacidad.html", "privacy.html", "privacy.html"),
+    "normas": ("normas.html", "normas.html", "normas.html"),
+}
 
 
 def textos(code):
@@ -86,12 +93,12 @@ def bandera(flag, base):
 def pagina(plantilla, code, carpeta, flag, html_lang, todos, tipo):
     t = todos[code]
     base = "" if carpeta == "" else "../"
-    nombre = "index.html" if tipo == "inicio" else "privacy.html"
-    ruta = (carpeta + "/" if carpeta else "") + ("" if tipo == "inicio" else "privacy.html")
+    _, nombre, pag = PAGINAS[tipo]
+    ruta = (carpeta + "/" if carpeta else "") + pag
     alternates = "".join(
-        f'<link rel="alternate" hreflang="{hl}" href="{URL}{(c + "/" if c else "") + ("" if tipo == "inicio" else "privacy.html")}">'
+        f'<link rel="alternate" hreflang="{hl}" href="{URL}{(c + "/" if c else "") + pag}">'
         for _, c, _, _, _, hl in IDIOMAS
-    ) + f'<link rel="alternate" hreflang="x-default" href="{URL}{"" if tipo == "inicio" else "privacy.html"}">'
+    ) + f'<link rel="alternate" hreflang="x-default" href="{URL}{pag}">'
 
     # Selector: la pastilla y la hoja con los 22 idiomas agrupados por región
     picker = (
@@ -104,7 +111,7 @@ def pagina(plantilla, code, carpeta, flag, html_lang, todos, tipo):
         for c2, carp2, r2, f2, hl2, _ in IDIOMAS:
             if r2 != reg:
                 continue
-            destino = base + (carp2 + "/" if carp2 else "") + ("" if tipo == "inicio" else "privacy.html")
+            destino = base + (carp2 + "/" if carp2 else "") + pag
             if destino == "":
                 destino = "./"
             on = " on" if c2 == code else ""
@@ -126,7 +133,7 @@ def pagina(plantilla, code, carpeta, flag, html_lang, todos, tipo):
     )
     if carpeta == "":
         script += (
-            f"var M={mapa};var pag={json.dumps('' if tipo == 'inicio' else 'privacy.html')};"
+            f"var M={mapa};var pag={json.dumps(pag)};"
             "function elegir(){var s=null;try{s=localStorage.getItem('nx-lang')}catch(e){}if(s)return s;"
             "var ls=(navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||'']);"
             "for(var i=0;i<ls.length;i++){var l=(ls[i]||'').toLowerCase();if(!l)continue;"
@@ -144,6 +151,7 @@ def pagina(plantilla, code, carpeta, flag, html_lang, todos, tipo):
         "base": base,
         "home": "./",
         "privacy": "privacy.html",
+        "rules": "normas.html",
         "canonical": URL + ruta,
         "alternates": alternates,
         "picker": picker,
@@ -167,13 +175,13 @@ def generar():
     todos = {c: textos(c) for c, *_ in IDIOMAS}
     fallos = comprobar_textos(todos)
     plantillas = {}
-    for tipo, archivo in (("inicio", "inicio.html"), ("privacidad", "privacidad.html")):
+    for tipo, (archivo, _, _) in PAGINAS.items():
         with open(os.path.join(WEB, archivo), encoding="utf-8") as f:
             plantillas[tipo] = f.read()
     archivos = {}
     if not fallos:
         for code, carpeta, _, flag, html_lang, _ in IDIOMAS:
-            for tipo in ("inicio", "privacidad"):
+            for tipo in PAGINAS:
                 destino, salida = pagina(plantillas[tipo], code, carpeta, flag, html_lang, todos, tipo)
                 archivos[destino] = salida
         # Dirección antigua de la versión en inglés
@@ -185,7 +193,7 @@ def generar():
         urls = []
         for _, carpeta, *_ in IDIOMAS:
             pre = URL + (carpeta + "/" if carpeta else "")
-            urls += [pre, pre + "privacy.html"]
+            urls += [pre + pag for _, _, pag in PAGINAS.values()]
         archivos[os.path.join(RAIZ, "sitemap.xml")] = (
             '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
             + "".join(f"  <url><loc>{u}</loc></url>\n" for u in urls) + "</urlset>\n"

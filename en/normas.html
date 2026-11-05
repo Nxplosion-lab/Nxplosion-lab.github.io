@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Community guidelines · Platinum Hunter</title><link rel="canonical" href="https://nxplosion-lab.github.io/en/normas.html"><link rel="alternate" hreflang="es" href="https://nxplosion-lab.github.io/normas.html"><link rel="alternate" hreflang="en" href="https://nxplosion-lab.github.io/en/normas.html"><link rel="alternate" hreflang="fr" href="https://nxplosion-lab.github.io/fr/normas.html"><link rel="alternate" hreflang="de" href="https://nxplosion-lab.github.io/de/normas.html"><link rel="alternate" hreflang="it" href="https://nxplosion-lab.github.io/it/normas.html"><link rel="alternate" hreflang="pt-PT" href="https://nxplosion-lab.github.io/pt-pt/normas.html"><link rel="alternate" hreflang="nl" href="https://nxplosion-lab.github.io/nl/normas.html"><link rel="alternate" hreflang="pl" href="https://nxplosion-lab.github.io/pl/normas.html"><link rel="alternate" hreflang="ru" href="https://nxplosion-lab.github.io/ru/normas.html"><link rel="alternate" hreflang="uk" href="https://nxplosion-lab.github.io/uk/normas.html"><link rel="alternate" hreflang="tr" href="https://nxplosion-lab.github.io/tr/normas.html"><link rel="alternate" hreflang="es-419" href="https://nxplosion-lab.github.io/es-419/normas.html"><link rel="alternate" hreflang="pt-BR" href="https://nxplosion-lab.github.io/pt-br/normas.html"><link rel="alternate" hreflang="ja" href="https://nxplosion-lab.github.io/ja/normas.html"><link rel="alternate" hreflang="ko" href="https://nxplosion-lab.github.io/ko/normas.html"><link rel="alternate" hreflang="zh-Hans" href="https://nxplosion-lab.github.io/zh-hans/normas.html"><link rel="alternate" hreflang="zh-Hant" href="https://nxplosion-lab.github.io/zh-hant/normas.html"><link rel="alternate" hreflang="hi" href="https://nxplosion-lab.github.io/hi/normas.html"><link rel="alternate" hreflang="id" href="https://nxplosion-lab.github.io/id/normas.html"><link rel="alternate" hreflang="th" href="https://nxplosion-lab.github.io/th/normas.html"><link rel="alternate" hreflang="vi" href="https://nxplosion-lab.github.io/vi/normas.html"><link rel="alternate" hreflang="ar" href="https://nxplosion-lab.github.io/ar/normas.html"><link rel="alternate" hreflang="x-default" href="https://nxplosion-lab.github.io/normas.html">
+<style>
+  :root { --bg:#ffffff; --fg:#1b1f24; --muted:#57606a; --accent:#3b6fd8; --line:#d0d7de; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0d1117; --fg:#e3e6ea; --muted:#a9b2bd; --accent:#6fb3ff; --line:#30363d; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:1.8rem; margin:0 0 4px; } h2 { font-size:1.2rem; margin-top:2rem; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  .muted { color:var(--muted); } a { color:var(--accent); } li { margin:4px 0; }
+  nav a { margin-right:12px; }
+
+  .top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px; }
+  .lang { display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 12px 0 10px; border-radius:999px; border:1px solid var(--line); background:transparent; font:600 14px system-ui,sans-serif; color:var(--fg); cursor:pointer; }
+  .lang img { width:22px; height:auto; border-radius:3px; } .lang .cv { opacity:.6; font-size:11px; }
+  .zh { display:inline-flex; width:22px; height:16px; border-radius:3px; background:var(--line); align-items:center; justify-content:center; font:700 10px sans-serif; }
+  .note { border-left:3px solid var(--accent); padding:4px 12px; color:var(--muted); }
+  dialog.langs { border:0; padding:0; background:transparent; color:inherit; max-width:none; max-height:none; width:100%; height:100%; }
+  dialog.langs::backdrop { background:rgba(0,0,0,.55); }
+  .sheet { position:fixed; left:50%; top:60px; transform:translateX(-50%); width:min(560px,94vw); max-height:84vh; overflow:auto; background:var(--bg); border:1px solid var(--line); border-radius:20px; padding:16px 18px 22px; }
+  .grab { display:none; } .sheet h3 { margin:0 0 4px; font-size:1.2rem; }
+  .rg { font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:14px 0 8px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .it { display:flex; flex-direction:column; align-items:center; gap:5px; padding:9px 2px; border-radius:12px; border:1px solid transparent; font-size:12px; font-weight:600; color:var(--fg); text-align:center; line-height:1.15; text-decoration:none; }
+  .it:hover { background:var(--line); } .it img { width:32px; height:auto; border-radius:4px; } .it .zh { width:32px; height:23px; font-size:13px; }
+  .it.on { border-color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="./">Back to the website</a><button class="lang" type="button" onclick="document.getElementById('langs').showModal()" aria-haspopup="dialog"><img src="../assets/banderas/en.png" alt="" width="32" height="24">English<span class="cv">▼</span></button></div>
+<h1>Community guidelines</h1>
+<p class="muted">Last updated: 5 November 2026</p>
+<p class="note">These guidelines were written in Spanish. If the translations differ, the Spanish version prevails.</p>
+
+<h2>Platinum Hunter community guidelines</h2>
+<p>Tips, reviews and ratings are read by trophy hunters all over the world. To post, you have to accept these guidelines.</p>
+<ol>
+<li><strong>Respect.</strong> No insults, harassment, threats, discrimination or hate speech, and that includes against studios or players.</li>
+<li><strong>Nothing inappropriate.</strong> No sexual or violent content, nothing that promotes illegal activities and nothing that could harm anyone.</li>
+<li><strong>No spam or personal data.</strong> No advertising, no links to other sites and no personal data, yours or anyone else's (real name, phone number, address, accounts).</li>
+<li><strong>Fair play.</strong> No faking trophies, cheating in the rankings, or buying, selling or sharing accounts or boosting services.</li>
+<li><strong>Flag your spoilers.</strong> If a tip gives away the story, say so at the start.</li>
+<li><strong>Write about the game.</strong> Tips are for earning trophies, and reviews are for talking about the game and its trophies.</li>
+</ol>
+<h2>What happens if they're broken</h2>
+<p>Anyone can report a tip, a review or a player. After 3 reports, the content is hidden automatically until we review it. If the guidelines are broken, we may delete what was posted and remove access to the community features, temporarily or permanently. We'll always tell you why.</p>
+<h2>If you disagree</h2>
+<p>Write to us at <a href="mailto:duk3x.dev@gmail.com">duk3x.dev@gmail.com</a> and we'll look into it.</p>
+<h2>What you post</h2>
+<p>What you post is yours, but by posting it you give us permission to show it in the app. You can delete it whenever you like.</p>
+</main>
+<dialog class="langs" id="langs" onclick="if(event.target===this)this.close()"><div class="sheet"><div class="grab"></div><h3>Language</h3><div class="rg">Europe</div><div class="grid"><a class="it" href="../normas.html" hreflang="es" lang="es" data-lang="es"><img src="../assets/banderas/es.png" alt="" width="32" height="24">Español</a><a class="it on" href="../en/normas.html" hreflang="en" lang="en" data-lang="en"><img src="../assets/banderas/en.png" alt="" width="32" height="24">English</a><a class="it" href="../fr/normas.html" hreflang="fr" lang="fr" data-lang="fr"><img src="../assets/banderas/fr.png" alt="" width="32" height="24">Français</a><a class="it" href="../de/normas.html" hreflang="de" lang="de" data-lang="de"><img src="../assets/banderas/de.png" alt="" width="32" height="24">Deutsch</a><a class="it" href="../it/normas.html" hreflang="it" lang="it" data-lang="it"><img src="../assets/banderas/it.png" alt="" width="32" height="24">Italiano</a><a class="it" href="../pt-pt/normas.html" hreflang="pt-PT" lang="pt-PT" data-lang="pt-pt"><img src="../assets/banderas/pt-PT.png" alt="" width="32" height="24">Português</a><a class="it" href="../nl/normas.html" hreflang="nl" lang="nl" data-lang="nl"><img src="../assets/banderas/nl.png" alt="" width="32" height="24">Nederlands</a><a class="it" href="../pl/normas.html" hreflang="pl" lang="pl" data-lang="pl"><img src="../assets/banderas/pl.png" alt="" width="32" height="24">Polski</a><a class="it" href="../ru/normas.html" hreflang="ru" lang="ru" data-lang="ru"><img src="../assets/banderas/ru.png" alt="" width="32" height="24">Русский</a><a class="it" href="../uk/normas.html" hreflang="uk" lang="uk" data-lang="uk"><img src="../assets/banderas/uk.png" alt="" width="32" height="24">Українська</a><a class="it" href="../tr/normas.html" hreflang="tr" lang="tr" data-lang="tr"><img src="../assets/banderas/tr.png" alt="" width="32" height="24">Türkçe</a></div><div class="rg">Americas</div><div class="grid"><a class="it" href="../es-419/normas.html" hreflang="es-419" lang="es-419" data-lang="es-419"><img src="../assets/banderas/es-419.png" alt="" width="32" height="24">Español (Latinoamérica)</a><a class="it" href="../pt-br/normas.html" hreflang="pt-BR" lang="pt-BR" data-lang="pt-br"><img src="../assets/banderas/pt-BR.png" alt="" width="32" height="24">Português (Brasil)</a></div><div class="rg">Asia &amp; Middle East</div><div class="grid"><a class="it" href="../ja/normas.html" hreflang="ja" lang="ja" data-lang="ja"><img src="../assets/banderas/ja.png" alt="" width="32" height="24">日本語</a><a class="it" href="../ko/normas.html" hreflang="ko" lang="ko" data-lang="ko"><img src="../assets/banderas/ko.png" alt="" width="32" height="24">한국어</a><a class="it" href="../zh-hans/normas.html" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh-hans"><img src="../assets/banderas/zh-Hans.png" alt="" width="32" height="24">简体中文</a><a class="it" href="../zh-hant/normas.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh-hant"><span class="zh">繁</span>繁體中文</a><a class="it" href="../hi/normas.html" hreflang="hi" lang="hi" data-lang="hi"><img src="../assets/banderas/hi.png" alt="" width="32" height="24">हिन्दी</a><a class="it" href="../id/normas.html" hreflang="id" lang="id" data-lang="id"><img src="../assets/banderas/id.png" alt="" width="32" height="24">Bahasa Indonesia</a><a class="it" href="../th/normas.html" hreflang="th" lang="th" data-lang="th"><img src="../assets/banderas/th.png" alt="" width="32" height="24">ไทย</a><a class="it" href="../vi/normas.html" hreflang="vi" lang="vi" data-lang="vi"><img src="../assets/banderas/vi.png" alt="" width="32" height="24">Tiếng Việt</a><a class="it" href="../ar/normas.html" hreflang="ar" lang="ar" data-lang="ar"><img src="../assets/banderas/ar.png" alt="" width="32" height="24">العربية</a></div></div></dialog><script>(function(){document.querySelectorAll('#langs a[data-lang]').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('nx-lang',a.dataset.lang)}catch(e){}})});})();</script>
+</body>
+</html>
