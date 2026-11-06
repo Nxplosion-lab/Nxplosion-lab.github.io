@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="nl" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moodcell · Privacybeleid</title><link rel="canonical" href="https://nxplosion-lab.github.io/nl/moodcell-privacy.html"><link rel="alternate" hreflang="es" href="https://nxplosion-lab.github.io/moodcell-privacy.html"><link rel="alternate" hreflang="en" href="https://nxplosion-lab.github.io/en/moodcell-privacy.html"><link rel="alternate" hreflang="fr" href="https://nxplosion-lab.github.io/fr/moodcell-privacy.html"><link rel="alternate" hreflang="de" href="https://nxplosion-lab.github.io/de/moodcell-privacy.html"><link rel="alternate" hreflang="it" href="https://nxplosion-lab.github.io/it/moodcell-privacy.html"><link rel="alternate" hreflang="pt-PT" href="https://nxplosion-lab.github.io/pt-pt/moodcell-privacy.html"><link rel="alternate" hreflang="nl" href="https://nxplosion-lab.github.io/nl/moodcell-privacy.html"><link rel="alternate" hreflang="pl" href="https://nxplosion-lab.github.io/pl/moodcell-privacy.html"><link rel="alternate" hreflang="ru" href="https://nxplosion-lab.github.io/ru/moodcell-privacy.html"><link rel="alternate" hreflang="uk" href="https://nxplosion-lab.github.io/uk/moodcell-privacy.html"><link rel="alternate" hreflang="tr" href="https://nxplosion-lab.github.io/tr/moodcell-privacy.html"><link rel="alternate" hreflang="es-419" href="https://nxplosion-lab.github.io/es-419/moodcell-privacy.html"><link rel="alternate" hreflang="pt-BR" href="https://nxplosion-lab.github.io/pt-br/moodcell-privacy.html"><link rel="alternate" hreflang="ja" href="https://nxplosion-lab.github.io/ja/moodcell-privacy.html"><link rel="alternate" hreflang="ko" href="https://nxplosion-lab.github.io/ko/moodcell-privacy.html"><link rel="alternate" hreflang="zh-Hans" href="https://nxplosion-lab.github.io/zh-hans/moodcell-privacy.html"><link rel="alternate" hreflang="zh-Hant" href="https://nxplosion-lab.github.io/zh-hant/moodcell-privacy.html"><link rel="alternate" hreflang="hi" href="https://nxplosion-lab.github.io/hi/moodcell-privacy.html"><link rel="alternate" hreflang="id" href="https://nxplosion-lab.github.io/id/moodcell-privacy.html"><link rel="alternate" hreflang="th" href="https://nxplosion-lab.github.io/th/moodcell-privacy.html"><link rel="alternate" hreflang="vi" href="https://nxplosion-lab.github.io/vi/moodcell-privacy.html"><link rel="alternate" hreflang="ar" href="https://nxplosion-lab.github.io/ar/moodcell-privacy.html"><link rel="alternate" hreflang="x-default" href="https://nxplosion-lab.github.io/moodcell-privacy.html">
+<style>
+  :root { --bg:#ffffff; --fg:#1b1f24; --muted:#57606a; --accent:#3b6fd8; --line:#d0d7de; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#0d1117; --fg:#e3e6ea; --muted:#a9b2bd; --accent:#6fb3ff; --line:#30363d; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:760px; margin:0 auto; padding:32px 16px 64px; }
+  h1 { font-size:1.8rem; margin:0 0 4px; } h2 { font-size:1.2rem; margin-top:2rem; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  .muted { color:var(--muted); } a { color:var(--accent); } li { margin:4px 0; }
+  nav a { margin-right:12px; }
+
+  .top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px; }
+  .lang { display:inline-flex; align-items:center; gap:8px; height:36px; padding:0 12px 0 10px; border-radius:999px; border:1px solid var(--line); background:transparent; font:600 14px system-ui,sans-serif; color:var(--fg); cursor:pointer; }
+  .lang img { width:22px; height:auto; border-radius:3px; } .lang .cv { opacity:.6; font-size:11px; }
+  .zh { display:inline-flex; width:22px; height:16px; border-radius:3px; background:var(--line); align-items:center; justify-content:center; font:700 10px sans-serif; }
+  .note { border-left:3px solid var(--accent); padding:4px 12px; color:var(--muted); }
+  dialog.langs { border:0; padding:0; background:transparent; color:inherit; max-width:none; max-height:none; width:100%; height:100%; }
+  dialog.langs::backdrop { background:rgba(0,0,0,.55); }
+  .sheet { position:fixed; left:50%; top:60px; transform:translateX(-50%); width:min(560px,94vw); max-height:84vh; overflow:auto; background:var(--bg); border:1px solid var(--line); border-radius:20px; padding:16px 18px 22px; }
+  .grab { display:none; } .sheet h3 { margin:0 0 4px; font-size:1.2rem; }
+  .rg { font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); margin:14px 0 8px; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+  .it { display:flex; flex-direction:column; align-items:center; gap:5px; padding:9px 2px; border-radius:12px; border:1px solid transparent; font-size:12px; font-weight:600; color:var(--fg); text-align:center; line-height:1.15; text-decoration:none; }
+  .it:hover { background:var(--line); } .it img { width:32px; height:auto; border-radius:4px; } .it .zh { width:32px; height:23px; font-size:13px; }
+  .it.on { border-color:var(--accent); }
+</style>
+</head>
+<body>
+<main>
+<div class="top"><a href="./">Terug naar de website</a><button class="lang" type="button" onclick="document.getElementById('langs').showModal()" aria-haspopup="dialog"><img src="../assets/banderas/nl.png" alt="" width="32" height="24">Nederlands<span class="cv">▼</span></button></div>
+<h1>Privacybeleid van Moodcell</h1>
+<p class="muted">Laatst bijgewerkt: 6 november 2026</p>
+<p class="note">Dit beleid is opgesteld in het Spaans. Als de vertalingen daarvan afwijken, is de Spaanse versie leidend.</p>
+
+<h2>1. Verwerkingsverantwoordelijke</h2>
+<p><strong>NXplosion Labs</strong> (Duk3X), onafhankelijke ontwikkelaar, gevestigd in Spanje.<br>
+Contact: <a href="mailto:duk3x.dev@gmail.com">duk3x.dev@gmail.com</a></p>
+
+<h2>2. Wat de app doet</h2>
+<p>Moodcell: Emoji Battery zet een personage of een ontwerp op de plek van de batterij en laat je de statusbalk van je telefoon aanpassen (klok, midden, batterij, pictogrammen en achtergrond); daarnaast biedt de app live achtergronden en een widget. <strong>Er zijn geen accounts en er is geen eigen server:</strong> alles wat je instelt, blijft op je apparaat.</p>
+
+<h2>3. Gegevens die op je apparaat blijven</h2>
+<ul>
+  <li><strong>Batterij:</strong> de app leest via Android het niveau, of het apparaat oplaadt, de spanning, de stroom, het vermogen, de temperatuur, de lading, het aantal laadcycli, de conditie, de chemische samenstelling en het type lader uit, om de balk, het paneel en de oplaadanimatie te tekenen. De grafiek van de laatste 5 minuten bestaat alleen in het geheugen van de telefoon.</li>
+  <li><strong>Je instellingen:</strong> het ontwerp, de onderdelen, het thema, de kleuren, je favorieten en de apps waarin je de balk verbergt, worden op het apparaat opgeslagen.</li>
+  <li><strong>Je achtergrondfoto:</strong> als je een foto uit je galerij als achtergrond kiest, wordt die in de app gekopieerd zodat hij kan worden weergegeven. De foto verlaat het apparaat niet en wordt niet opgenomen in back-ups.</li>
+  <li><strong>Android-back-up:</strong> als je die hebt ingeschakeld, kan Android je Moodcell-instellingen in je Google-account opslaan, zodat je ze kunt terugzetten wanneer je een andere telefoon neemt. Dit wordt beheerd door Google en je regelt het zelf in de Android-instellingen.</li>
+</ul>
+
+<h2>4. Toegankelijkheidsservice</h2>
+<p>Moodcell gebruikt de toegankelijkheidsservice van Android uitsluitend om de eigen balk boven op de statusbalk te kunnen tonen en die te verbergen wanneer dat nodig is. Daarmee leest de app <strong>welke app je op de voorgrond hebt en het type en de grootte van het venster daarvan</strong>, om de balk te verbergen op volledig scherm en in de apps die je kiest, en herkent de app wanneer je op de balk tikt, zodat het onderdeel waarop je tikt kan worden geopend. <strong>De app leest niet wat je typt of wat er op je scherm staat</strong>, slaat die informatie niet op en verstuurt die nergens heen. Je kunt de service op elk moment uitschakelen in de toegankelijkheidsinstellingen van Android.</p>
+
+<h2>5. Locatie (alleen in de RF-modus)</h2>
+<p>De optionele RF-modus geeft de dekking weer zoals een spectrumanalyzer. Om informatie over het mobiele netwerk (signaal en cellen) te kunnen lezen, vereist Android de locatietoestemming. Moodcell gebruikt de locatie alleen op dat moment, om de balk te tekenen zolang die modus actief is: je locatie wordt niet opgeslagen of verstuurd. Als je de RF-modus niet inschakelt, vraagt de app deze toestemming niet.</p>
+
+<h2>6. Advertenties (Google AdMob)</h2>
+<p>De gratis versie kan advertenties van Google AdMob tonen. Google kan de advertentie-ID van het apparaat, het IP-adres (bij benadering de locatie), apparaatgegevens en gegevens over interactie met advertenties verzamelen om advertenties te tonen, te meten en fraude te voorkomen. In de Europese Economische Ruimte, het Verenigd Koninkrijk en Zwitserland vraagt de app je om toestemming voordat gepersonaliseerde advertenties worden getoond, en je kunt die keuze op elk moment wijzigen in de instellingen van de app. Meer informatie: <a href="https://policies.google.com/technologies/partner-sites">Hoe Google gegevens gebruikt</a>. Je kunt je advertentie-ID resetten of verwijderen in de Android-instellingen.</p>
+
+<h2>7. Aankopen</h2>
+<p>De aankoop van Premium wordt afgehandeld door Google Play. Wij ontvangen je betaalgegevens niet.</p>
+
+<h2>8. Rechtsgrond</h2>
+<ul>
+  <li>Uitvoering van de dienst die je aanvraagt: het aanpassen van je balk, je achtergronden en je widget.</li>
+  <li>Je toestemming voor de toegankelijkheidsservice, de locatie in de RF-modus en gepersonaliseerde advertenties (die je op elk moment kunt intrekken).</li>
+</ul>
+
+<h2>9. Bewaring en verwijdering</h2>
+<p>Omdat er geen server en geen accounts zijn, bewaren wij geen gegevens van je. Om alles van Moodcell te wissen, volstaat het om de app-gegevens te wissen in de Android-instellingen of de app te verwijderen. Heb je vragen, schrijf ons dan op het adres in punt 1.</p>
+
+<h2>10. Verwerkers en doorgiften</h2>
+<p>Wij maken gebruik van Google (AdMob en Google Play) als verwerker voor advertenties en aankopen. Google kan sommige gegevens buiten de Europese Unie verwerken met de waarborgen van de modelcontractbepalingen (standaardcontractbepalingen) van de Europese Commissie.</p>
+
+<h2>11. Minderjarigen</h2>
+<p>De app is niet bedoeld voor personen jonger dan 13 jaar.</p>
+
+<h2>12. Je rechten</h2>
+<p>Je kunt je rechten op inzage, rectificatie, gegevenswissing, bezwaar, beperking van de verwerking en overdraagbaarheid van gegevens uitoefenen door te schrijven naar <a href="mailto:duk3x.dev@gmail.com">duk3x.dev@gmail.com</a>, en een klacht indienen bij de Spaanse toezichthoudende autoriteit, de Agencia Española de Protección de Datos (<a href="https://www.aepd.es">aepd.es</a>).</p>
+
+<h2>13. Wijzigingen</h2>
+<p>Als dit beleid verandert, publiceren wij de nieuwe versie met de bijbehorende datum op deze pagina.</p>
+</main>
+<dialog class="langs" id="langs" onclick="if(event.target===this)this.close()"><div class="sheet"><div class="grab"></div><h3>Taal</h3><div class="rg">Europa</div><div class="grid"><a class="it" href="../moodcell-privacy.html" hreflang="es" lang="es" data-lang="es"><img src="../assets/banderas/es.png" alt="" width="32" height="24">Español</a><a class="it" href="../en/moodcell-privacy.html" hreflang="en" lang="en" data-lang="en"><img src="../assets/banderas/en.png" alt="" width="32" height="24">English</a><a class="it" href="../fr/moodcell-privacy.html" hreflang="fr" lang="fr" data-lang="fr"><img src="../assets/banderas/fr.png" alt="" width="32" height="24">Français</a><a class="it" href="../de/moodcell-privacy.html" hreflang="de" lang="de" data-lang="de"><img src="../assets/banderas/de.png" alt="" width="32" height="24">Deutsch</a><a class="it" href="../it/moodcell-privacy.html" hreflang="it" lang="it" data-lang="it"><img src="../assets/banderas/it.png" alt="" width="32" height="24">Italiano</a><a class="it" href="../pt-pt/moodcell-privacy.html" hreflang="pt-PT" lang="pt-PT" data-lang="pt-pt"><img src="../assets/banderas/pt-PT.png" alt="" width="32" height="24">Português</a><a class="it on" href="../nl/moodcell-privacy.html" hreflang="nl" lang="nl" data-lang="nl"><img src="../assets/banderas/nl.png" alt="" width="32" height="24">Nederlands</a><a class="it" href="../pl/moodcell-privacy.html" hreflang="pl" lang="pl" data-lang="pl"><img src="../assets/banderas/pl.png" alt="" width="32" height="24">Polski</a><a class="it" href="../ru/moodcell-privacy.html" hreflang="ru" lang="ru" data-lang="ru"><img src="../assets/banderas/ru.png" alt="" width="32" height="24">Русский</a><a class="it" href="../uk/moodcell-privacy.html" hreflang="uk" lang="uk" data-lang="uk"><img src="../assets/banderas/uk.png" alt="" width="32" height="24">Українська</a><a class="it" href="../tr/moodcell-privacy.html" hreflang="tr" lang="tr" data-lang="tr"><img src="../assets/banderas/tr.png" alt="" width="32" height="24">Türkçe</a></div><div class="rg">Amerika</div><div class="grid"><a class="it" href="../es-419/moodcell-privacy.html" hreflang="es-419" lang="es-419" data-lang="es-419"><img src="../assets/banderas/es-419.png" alt="" width="32" height="24">Español (Latinoamérica)</a><a class="it" href="../pt-br/moodcell-privacy.html" hreflang="pt-BR" lang="pt-BR" data-lang="pt-br"><img src="../assets/banderas/pt-BR.png" alt="" width="32" height="24">Português (Brasil)</a></div><div class="rg">Azië en het Midden-Oosten</div><div class="grid"><a class="it" href="../ja/moodcell-privacy.html" hreflang="ja" lang="ja" data-lang="ja"><img src="../assets/banderas/ja.png" alt="" width="32" height="24">日本語</a><a class="it" href="../ko/moodcell-privacy.html" hreflang="ko" lang="ko" data-lang="ko"><img src="../assets/banderas/ko.png" alt="" width="32" height="24">한국어</a><a class="it" href="../zh-hans/moodcell-privacy.html" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh-hans"><img src="../assets/banderas/zh-Hans.png" alt="" width="32" height="24">简体中文</a><a class="it" href="../zh-hant/moodcell-privacy.html" hreflang="zh-Hant" lang="zh-Hant" data-lang="zh-hant"><span class="zh">繁</span>繁體中文</a><a class="it" href="../hi/moodcell-privacy.html" hreflang="hi" lang="hi" data-lang="hi"><img src="../assets/banderas/hi.png" alt="" width="32" height="24">हिन्दी</a><a class="it" href="../id/moodcell-privacy.html" hreflang="id" lang="id" data-lang="id"><img src="../assets/banderas/id.png" alt="" width="32" height="24">Bahasa Indonesia</a><a class="it" href="../th/moodcell-privacy.html" hreflang="th" lang="th" data-lang="th"><img src="../assets/banderas/th.png" alt="" width="32" height="24">ไทย</a><a class="it" href="../vi/moodcell-privacy.html" hreflang="vi" lang="vi" data-lang="vi"><img src="../assets/banderas/vi.png" alt="" width="32" height="24">Tiếng Việt</a><a class="it" href="../ar/moodcell-privacy.html" hreflang="ar" lang="ar" data-lang="ar"><img src="../assets/banderas/ar.png" alt="" width="32" height="24">العربية</a></div></div></dialog><script>(function(){document.querySelectorAll('#langs a[data-lang]').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('nx-lang',a.dataset.lang)}catch(e){}})});})();</script>
+</body>
+</html>
