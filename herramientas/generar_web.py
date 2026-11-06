@@ -49,12 +49,14 @@ IDIOMAS = [
     ("ar", "ar", "asia", "ar", "ar", "ar"),
 ]
 RTL = {"ar"}
-CAMPOS_HTML = {"hero_title", "privacy_html", "rules_html"}  # llevan etiquetas: no se escapan
+CAMPOS_HTML = {"hero_title", "privacy_html", "rules_html", "mc_privacy_html"}  # llevan etiquetas: no se escapan
 # tipo de página: plantilla y archivo de salida ("" en la ruta pública de la portada)
 PAGINAS = {
     "inicio": ("inicio.html", "index.html", ""),
     "privacidad": ("privacidad.html", "privacy.html", "privacy.html"),
     "normas": ("normas.html", "normas.html", "normas.html"),
+    # Moodcell: su propia política (la app enlaza nxplosion-lab.github.io/moodcell/privacidad, que lleva aquí)
+    "privacidad_moodcell": ("privacidad_moodcell.html", "moodcell-privacy.html", "moodcell-privacy.html"),
 }
 
 
@@ -184,6 +186,13 @@ def generar():
             for tipo in PAGINAS:
                 destino, salida = pagina(plantillas[tipo], code, carpeta, flag, html_lang, todos, tipo)
                 archivos[destino] = salida
+        # La dirección que enlaza la app Moodcell: lleva a su política en el idioma del navegador
+        archivos[os.path.join(RAIZ, "moodcell", "privacidad", "index.html")] = (
+            '<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Moodcell · Política de privacidad</title>'
+            f'<link rel="canonical" href="{URL}moodcell-privacy.html">'
+            '<meta http-equiv="refresh" content="0; url=../../moodcell-privacy.html"></head>'
+            '<body><a href="../../moodcell-privacy.html">Moodcell · Política de privacidad</a></body></html>\n'
+        )
         # Dirección antigua de la versión en inglés
         archivos[os.path.join(RAIZ, "en.html")] = (
             '<!doctype html><html lang="en"><head><meta charset="utf-8"><title>NXplosion Labs</title>'

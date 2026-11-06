@@ -10,6 +10,8 @@ on:
       - "*.html"
       - "*/index.html"
       - "*/privacy.html"
+      - "*/moodcell-privacy.html"
+      - "moodcell/**"
       - ".github/workflows/web-en-22-idiomas.yml"
   pull_request:
   workflow_dispatch:
