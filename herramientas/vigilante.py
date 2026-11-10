@@ -222,7 +222,8 @@ def trozo_del_error(registro, max_lineas=30, ancho=160):
         l = _ANSI.sub("", _SELLO.sub("", l)).rstrip()
         if l and not l.startswith(("##[group]", "##[endgroup]")):
             lineas.append(l)
-    gradle = next((i for i, l in enumerate(lineas) if "What went wrong" in l), None)
+    # Solo la línea que Gradle escribe, no un script que cite el texto (el de Cookline lo busca con grep)
+    gradle = next((i for i, l in enumerate(lineas) if l.lstrip().startswith("* What went wrong")), None)
     error = next((i for i, l in enumerate(lineas) if l.startswith("##[error]")), None)
     if gradle is not None:
         # Los errores de Kotlin («e: …kt:12:5 …») salen antes del resumen de Gradle: se añaden detrás,
@@ -290,7 +291,7 @@ def seccion_de_fallos(detalles, max_lineas=30):
             causa = "se pasó de su tope de tiempo" if t["tiempo"] else (f"falla en el paso «{t['paso']}»" if t["paso"] else "falla")
             l.append(f"- Trabajo «{t['nombre']}»: {causa}")
             # El trozo de Gradle empieza por la causa; el otro acaba en la línea del error
-            corte = t["trozo"][:max_lineas] if t["trozo"][:1] and "What went wrong" in t["trozo"][0] else t["trozo"][-max_lineas:]
+            corte = t["trozo"][:max_lineas] if t["trozo"][:1] and t["trozo"][0].lstrip().startswith("* What went wrong") else t["trozo"][-max_lineas:]
             trozo = corte if max_lineas else []
             if trozo:
                 l += ["", "<details><summary>Trozo del registro</summary>", "", "```text", *trozo, "```", "", "</details>"]

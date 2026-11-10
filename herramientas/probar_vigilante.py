@@ -121,6 +121,16 @@ OTRO = "\n".join([f"2026-11-09T10:00:{i:02d}Z línea {i}" for i in range(50)] +
 to = v.trozo_del_error(OTRO, max_lineas=10)
 comprobar("sin Gradle: acaba en el ##[error]", to[-1] == "##[error]Falta el fichero recetas.json")
 comprobar("sin Gradle: 10 líneas, no la limpieza de después", len(to) == 10 and "Post job cleanup." not in to)
+# Caso real de Cookline (10-11-2026): el script cita «What went wrong» en un grep y el error va después
+COOKLINE = ("2026-11-04T10:00:00.0000000Z ##[group]Run grep -E '^e: |error:|FAILED|What went wrong' gradle.log\n"
+            "2026-11-04T10:00:00.0000000Z grep -E '^e: |error:|FAILED|What went wrong|AssertionError' gradle.log | head -60\n"
+            "2026-11-04T10:00:00.0000000Z ##[endgroup]\n"
+            "2026-11-04T10:00:01.0000000Z No hay acceso al recetario\n"
+            "2026-11-04T10:00:01.0000000Z ##[error]Falta el secreto del recetario\n"
+            "2026-11-04T10:00:02.0000000Z Post job cleanup.\n")
+tc = v.trozo_del_error(COOKLINE)
+comprobar("Cookline: un grep que cita «What went wrong» no cuenta como Gradle", tc[-1] == "##[error]Falta el secreto del recetario")
+comprobar("Cookline: no trae la limpieza de después", "Post job cleanup." not in tc)
 comprobar("«```» no rompe el bloque", v.trozo_del_error("##[error]mal ```x```") == ["##[error]mal ´´´x´´´"])
 comprobar("líneas larguísimas se cortan", len(v.trozo_del_error("x" * 500)[0]) == 161)
 comprobar("registro vacío no rompe", v.trozo_del_error("") == [] and v.trozo_del_error(None) == [])
