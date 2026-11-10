@@ -10,10 +10,11 @@ ejecución se cobra como mínimo 1 min. Aquí sale gratis.
 
 Lo que hace:
   - Limpia los paquetes de Actions viejos de todos los repos (deja el último de cada tipo).
-  - Avisa de compilaciones que han fallado en la última semana.
+  - Avisa de compilaciones que han fallado en la última semana, con el paso que falló y el
+    trozo del registro donde está el error (para leerlo sin entrar en el repo).
   - Calcula los minutos gastados este mes en los repos privados y avisa al acercarse al tope.
   - Mira el espacio de paquetes (tope de 0,5 GB para toda la cuenta).
-  - Cuenta las propuestas de Dependabot abiertas.
+  - Cuenta las propuestas de Dependabot abiertas y apunta su número, título y antigüedad.
   - Comprueba que la versión del código (VERSION o APP_VERSION) esté apuntada en CAMBIOS.md.
   - En las apps de Play, comprueba el targetSdk contra el que exige Google.
   - Avisa de workflows que compilan con cada push en un repo privado o que no tienen tope de tiempo.
@@ -35,6 +36,7 @@ TITULO_ISSUE = "Mantenimiento de las apps"
 TOPE_MIN_MES = 2000          # minutos gratis al mes en los repos privados
 TOPE_PAQUETES_MB = 500       # 0,5 GB de paquetes de Actions para toda la cuenta
 DIAS_SEMANA = 7
+TOPE_ISSUE = 60000           # GitHub corta el cuerpo de un issue en 65.536 caracteres
 
 
 class ErrorApi(Exception):
@@ -82,6 +84,38 @@ class GitHub:
             m = re.search(r'<([^>]+)>;\s*rel="next"', cab.get("Link", "") or "")
             url = m.group(1) if m else None
         return filas
+
+    def registro(self, repo, id_trabajo):
+        """Texto del registro de un trabajo de Actions.
+        GitHub contesta con una redirección a un enlace temporal que ya lleva su firma: se sigue
+        a mano y sin el token, porque ese otro servidor no lo necesita y no tiene por qué verlo."""
+        class SinSeguir(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, *a, **k):
+                return None
+        req = urllib.request.Request(f"{API}/repos/{repo}/actions/jobs/{id_trabajo}/logs", headers={
+            "Authorization": f"Bearer {self.token}",
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+            "User-Agent": "NXplosion-Labs-vigilante",
+        })
+        self.llamadas += 1
+        try:
+            with urllib.request.build_opener(SinSeguir).open(req, timeout=60) as r:
+                return r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            destino = e.headers.get("Location") if e.code in (301, 302, 303, 307, 308) else None
+            if not destino:
+                raise ErrorApi(f"HTTP {e.code}") from None
+        except Exception as e:
+            raise ErrorApi(type(e).__name__) from None
+        try:
+            req2 = urllib.request.Request(destino, headers={"User-Agent": "NXplosion-Labs-vigilante"})
+            with urllib.request.urlopen(req2, timeout=60) as r:
+                return r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            raise ErrorApi(f"HTTP {e.code}") from None
+        except Exception as e:
+            raise ErrorApi(type(e).__name__) from None
 
     def fichero(self, repo, ruta):
         """Texto de un fichero del repo, o None si no existe."""
@@ -174,6 +208,44 @@ def revisar_workflow(texto, privado):
     return avisos
 
 
+_SELLO = re.compile(r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d+)?Z ?")
+_ANSI = re.compile(r"\x1b\[[0-9;]*[A-Za-z]")
+
+
+def trozo_del_error(registro, max_lineas=30, ancho=160):
+    """El trozo del registro donde está el error, limpio de horas y colores.
+    Gradle cuenta la causa en «* What went wrong:», así que si está, se coge eso.
+    Si no, las líneas de antes del primer «##[error]», que es donde Actions marca el fallo.
+    Lo último del registro no sirve: son los pasos de limpieza que van después del fallo."""
+    lineas = []
+    for l in (registro or "").replace("\r\n", "\n").split("\n"):
+        l = _ANSI.sub("", _SELLO.sub("", l)).rstrip()
+        if l and not l.startswith(("##[group]", "##[endgroup]")):
+            lineas.append(l)
+    gradle = next((i for i, l in enumerate(lineas) if "What went wrong" in l), None)
+    error = next((i for i, l in enumerate(lineas) if l.startswith("##[error]")), None)
+    if gradle is not None:
+        # Los errores de Kotlin («e: …kt:12:5 …») salen antes del resumen de Gradle: se añaden detrás,
+        # para que el trozo siga empezando por la causa
+        kotlin = [l for l in lineas[:gradle] if l.startswith("e: ")][:10]
+        causa = []
+        for l in lineas[gradle:gradle + 15]:   # la causa acaba donde Gradle empieza a dar consejos
+            if l.startswith(("* Try:", "BUILD FAILED")):
+                break
+            causa.append(l)
+        trozo = (causa + kotlin)[:max_lineas]
+    elif error is not None:
+        trozo = lineas[max(0, error - max_lineas + 1):error + 1]
+    else:
+        trozo = lineas[-max_lineas:]
+    # Sin «```» dentro, para que no rompa el bloque de código del issue
+    return [(l[:ancho] + "…" if len(l) > ancho else l).replace("```", "´´´") for l in trozo]
+
+
+def dias_desde(txt, ahora):
+    return max(0, (ahora - fecha(txt)).days)
+
+
 def coma(x, dec=1):
     return f"{x:.{dec}f}".replace(".", ",")
 
@@ -183,6 +255,55 @@ def huella(alertas):
 
 
 # ---------- Recogida ----------
+
+def detalle_del_fallo(gh, nombre, repo_corto, workflow, ejecucion):
+    """Qué trabajo y qué paso fallaron en la última ejecución, y el trozo del registro con el error.
+    Si algo no se puede leer, se dice en el detalle; nunca para el repaso del resto."""
+    d = {"repo": repo_corto, "workflow": workflow, "fecha": ejecucion.get("created_at", "")[:10],
+         "trabajos": [], "nota": None}
+    try:
+        trabajos = gh.todas(f"/repos/{nombre}/actions/runs/{ejecucion['id']}/jobs", clave="jobs", tope=100)
+    except ErrorApi as e:
+        d["nota"] = f"no se pudieron leer sus trabajos ({e})"
+        return d
+    malos = [t for t in trabajos if t.get("conclusion") in ("failure", "timed_out")][:2]
+    if not malos:
+        d["nota"] = "no hay ningún trabajo marcado como fallido (falló al arrancar)"
+    for t in malos:
+        paso = next((s["name"] for s in t.get("steps") or [] if s.get("conclusion") in ("failure", "timed_out")), None)
+        try:
+            trozo = trozo_del_error(gh.registro(nombre, t["id"]))
+        except ErrorApi as e:
+            trozo = [f"(no se pudo leer el registro: {e})"]
+        d["trabajos"].append({"nombre": t.get("name", ""), "paso": paso,
+                              "tiempo": t.get("conclusion") == "timed_out", "trozo": trozo})
+    return d
+
+
+def seccion_de_fallos(detalles, max_lineas=30):
+    l = []
+    for d in detalles:
+        l.append(f"### {d['repo']} · «{d['workflow']}» · {d['fecha']}")
+        if d.get("nota"):
+            l.append(f"- {d['nota']}")
+        for t in d["trabajos"]:
+            causa = "se pasó de su tope de tiempo" if t["tiempo"] else (f"falla en el paso «{t['paso']}»" if t["paso"] else "falla")
+            l.append(f"- Trabajo «{t['nombre']}»: {causa}")
+            # El trozo de Gradle empieza por la causa; el otro acaba en la línea del error
+            corte = t["trozo"][:max_lineas] if t["trozo"][:1] and "What went wrong" in t["trozo"][0] else t["trozo"][-max_lineas:]
+            trozo = corte if max_lineas else []
+            if trozo:
+                l += ["", "<details><summary>Trozo del registro</summary>", "", "```text", *trozo, "```", "", "</details>"]
+        l.append("")
+    return l
+
+
+def seccion_de_propuestas(propuestas):
+    l = []
+    for p in sorted(propuestas, key=lambda p: (p["repo"].lower(), p["numero"])):
+        l.append(f"- **{p['repo']}** #{p['numero']} · {p['titulo']} · hace {p['dias']} días")
+    return l + [""]
+
 
 def repasar(gh, dueno, ahora, sdk_play):
     try:
@@ -199,6 +320,7 @@ def repasar(gh, dueno, ahora, sdk_play):
     inicio_mes = ahora.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
     hace_semana = ahora - dt.timedelta(days=DIAS_SEMANA)
     filas, alertas, avisos = [], [], []
+    detalles, propuestas = [], []
     total_min = 0
     total_mb = 0.0
     borrados_n, borrados_mb = 0, 0.0
@@ -220,6 +342,7 @@ def repasar(gh, dueno, ahora, sdk_play):
             fila["fallos"] = fallos_vivos
             for w in fallos_vivos:
                 alertas.append(f"**{r['name']}**: «{w}» falla (última ejecución)")
+                detalles.append(detalle_del_fallo(gh, nombre, r["name"], w, ultimos[w]))
 
             minutos = 0
             if privado:
@@ -246,7 +369,11 @@ def repasar(gh, dueno, ahora, sdk_play):
 
             # Dependabot
             prs = gh.todas(f"/repos/{nombre}/pulls?state=open", tope=200)
-            fila["dependabot"] = sum(1 for p in prs if p["user"]["login"].startswith("dependabot"))
+            de_dependabot = [p for p in prs if p["user"]["login"].startswith("dependabot")]
+            fila["dependabot"] = len(de_dependabot)
+            for p in de_dependabot:
+                propuestas.append({"repo": r["name"], "numero": p["number"], "titulo": p["title"],
+                                   "dias": dias_desde(p["created_at"], ahora)})
             if fila["dependabot"]:
                 avisos.append(f"**{r['name']}**: {fila['dependabot']} propuesta(s) de Dependabot sin revisar")
 
@@ -286,6 +413,7 @@ def repasar(gh, dueno, ahora, sdk_play):
 
     return {
         "filas": filas, "alertas": alertas, "avisos": avisos,
+        "detalles": detalles, "propuestas": propuestas,
         "total_min": total_min, "total_mb": total_mb,
         "borrados_n": borrados_n, "borrados_mb": borrados_mb,
     }
@@ -325,8 +453,20 @@ def componer(res, ahora, caduca):
           f"- Limpieza de hoy: {res['borrados_n']} paquetes borrados ({coma(res['borrados_mb'])} MB)"]
     if caduca:
         l.append(f"- El token caduca el {caduca[:10]}")
-    l += ["", "_Este issue lo reescribe cada día el vigilante del repo de la web. No se compila ni se sube nada desde aquí._"]
-    return "\n".join(l), alertas
+    pie = ["", "_Este issue lo reescribe cada día el vigilante del repo de la web. No se compila ni se sube nada desde aquí._"]
+    # Si no cabe, se acortan los trozos de registro, nunca el resumen de arriba
+    for lineas in (30, 12, 4, 0):
+        extra = []
+        if res.get("detalles"):
+            extra += ["", "## Detalle de los fallos", "", *seccion_de_fallos(res["detalles"], lineas)]
+        if res.get("propuestas"):
+            extra += ["", "## Propuestas de Dependabot", "", *seccion_de_propuestas(res["propuestas"])]
+        cuerpo = "\n".join(l + extra + pie)
+        if len(cuerpo) <= TOPE_ISSUE:
+            break
+    else:
+        cuerpo = "\n".join(l + ["", "_(Detalle quitado: no cabía en el issue.)_"] + pie)
+    return cuerpo, alertas
 
 
 def publicar(gh, repo_informe, cuerpo, alertas):

@@ -94,6 +94,109 @@ _, alertas2 = v.componer(res, AHORA, "2027-11-01 10:00:00 UTC")
 comprobar("400 min y token lejano: sin alertas", alertas2 == [])
 comprobar("la huella no depende del orden", v.huella(["a", "b"]) == v.huella(["b", "a"]))
 
+# --- Trozo del error (registros con la forma real de Actions) ---
+GRADLE = ("2026-11-09T13:22:27.1234567Z ##[group]Run ./gradlew assembleRelease\n"
+          "2026-11-09T13:22:27.1234567Z Starting a Gradle Daemon\n"
+          "2026-11-09T13:24:01.0000000Z \x1b[31mFAILURE: Build failed with an exception.\x1b[0m\n"
+          "2026-11-09T13:24:01.0000000Z * What went wrong:\n"
+          "2026-11-09T13:24:01.0000000Z Execution failed for task ':app:compileReleaseKotlin'.\n"
+          "2026-11-09T13:24:01.0000000Z * Try:\n"
+          "2026-11-09T13:24:01.0000000Z BUILD FAILED in 1m 34s\n"
+          "2026-11-09T13:24:02.0000000Z ##[error]Process completed with exit code 1.\n"
+          "2026-11-09T13:24:03.0000000Z Post job cleanup.\n")
+KOTLIN = GRADLE.replace("Starting a Gradle Daemon\n", "Starting a Gradle Daemon\n2026-11-09T13:23:50.0000000Z e: file:///app/Receta.kt:12:5 Unresolved reference 'salsa'.\n")
+tk = v.trozo_del_error(KOTLIN)
+comprobar("Kotlin: trae la línea «e:» con fichero y línea", "e: file:///app/Receta.kt:12:5 Unresolved reference 'salsa'." in tk)
+comprobar("Kotlin: sigue empezando por la causa", tk[0] == "* What went wrong:")
+tg = v.trozo_del_error(GRADLE)
+comprobar("Gradle: empieza por «What went wrong»", tg[:1] == ["* What went wrong:"])
+comprobar("Gradle: trae la tarea que falla", "Execution failed for task ':app:compileReleaseKotlin'." in tg)
+comprobar("sin horas ni colores", not any("2026-11-09T" in l or "\x1b" in l for l in tg))
+comprobar("sin «* Try:»", "* Try:" not in tg)
+LARGO = KOTLIN.replace("* Try:\n", "* Try:\n" + "".join(f"2026-11-09T13:24:01.0000000Z > consejo {i}\n" for i in range(40)))
+comprobar("Kotlin: la línea «e:» no se pierde tras los consejos de Gradle",
+          any(l.startswith("e: ") for l in v.trozo_del_error(LARGO)) and not any("consejo" in l for l in v.trozo_del_error(LARGO)))
+OTRO = "\n".join([f"2026-11-09T10:00:{i:02d}Z línea {i}" for i in range(50)] +
+                 ["2026-11-09T10:01:00Z ##[error]Falta el fichero recetas.json", "2026-11-09T10:01:01Z Post job cleanup."])
+to = v.trozo_del_error(OTRO, max_lineas=10)
+comprobar("sin Gradle: acaba en el ##[error]", to[-1] == "##[error]Falta el fichero recetas.json")
+comprobar("sin Gradle: 10 líneas, no la limpieza de después", len(to) == 10 and "Post job cleanup." not in to)
+comprobar("«```» no rompe el bloque", v.trozo_del_error("##[error]mal ```x```") == ["##[error]mal ´´´x´´´"])
+comprobar("líneas larguísimas se cortan", len(v.trozo_del_error("x" * 500)[0]) == 161)
+comprobar("registro vacío no rompe", v.trozo_del_error("") == [] and v.trozo_del_error(None) == [])
+
+
+# --- Detalle del fallo, con un GitHub de mentira (sin red) ---
+class GhFalso:
+    def __init__(self, trabajos, registro=None, falla_registro=False):
+        self.t, self.r, self.f = trabajos, registro, falla_registro
+    def todas(self, ruta, clave=None, tope=1000):
+        return self.t
+    def registro(self, repo, id_trabajo):
+        if self.f:
+            raise v.ErrorApi("HTTP 410")
+        return self.r
+
+EJ = {"id": 7, "created_at": "2026-11-09T13:22:27Z"}
+TR = [{"id": 1, "name": "apk", "conclusion": "failure",
+       "steps": [{"name": "Checkout", "conclusion": "success"}, {"name": "Compilar", "conclusion": "failure"}]},
+      {"id": 2, "name": "lint", "conclusion": "success", "steps": []}]
+d = v.detalle_del_fallo(GhFalso(TR, GRADLE), "X/Cookline", "Cookline", "Compilar Cookline", EJ)
+comprobar("detalle: solo el trabajo que falla", [t["nombre"] for t in d["trabajos"]] == ["apk"])
+comprobar("detalle: el paso que falla", d["trabajos"][0]["paso"] == "Compilar")
+comprobar("detalle: con su fecha", d["fecha"] == "2026-11-09")
+d2 = v.detalle_del_fallo(GhFalso(TR, falla_registro=True), "X/C", "C", "W", EJ)
+comprobar("registro caducado: se dice y no rompe", "no se pudo leer el registro" in d2["trabajos"][0]["trozo"][0])
+d3 = v.detalle_del_fallo(GhFalso([]), "X/C", "C", "W", EJ)
+comprobar("sin trabajos fallidos: nota", d3["nota"] is not None and d3["trabajos"] == [])
+
+# --- La redirección del registro se sigue SIN el token ---
+import urllib.request as _ur, urllib.error as _ue, email.message as _em
+vistas = []
+class _Resp:
+    def __init__(self, t): self.t = t
+    def read(self): return self.t.encode()
+    def __enter__(self): return self
+    def __exit__(self, *a): return False
+class _Abridor:
+    def open(self, req, timeout=None):
+        vistas.append(("api", req.get_header("Authorization")))
+        h = _em.Message(); h["Location"] = "https://blob.example/registro?firma=1"
+        raise _ue.HTTPError(req.full_url, 302, "Found", h, None)
+_bo, _uo = _ur.build_opener, _ur.urlopen
+_ur.build_opener = lambda *a: _Abridor()
+def _abrir(req, timeout=None):
+    vistas.append(("blob", req.get_header("Authorization")))
+    return _Resp("hola")
+_ur.urlopen = _abrir
+try:
+    texto = v.GitHub("TOKEN").registro("X/C", 1)
+finally:
+    _ur.build_opener, _ur.urlopen = _bo, _uo
+comprobar("registro: sigue la redirección", texto == "hola")
+comprobar("registro: la API lleva el token", vistas[0] == ("api", "Bearer TOKEN"))
+comprobar("registro: el enlace temporal va sin token", vistas[1] == ("blob", None))
+
+# --- Informe con fallos y propuestas ---
+res3 = dict(res, total_min=241,
+            detalles=[d, d3],
+            propuestas=[{"repo": "Moodcell", "numero": 2, "titulo": "Actualizar librerías", "dias": 12},
+                        {"repo": "Cookline", "numero": 4, "titulo": "Bump x", "dias": 3}])
+c3, a3 = v.componer(res3, AHORA, "2027-11-01 10:00:00 UTC")
+comprobar("informe: sección de fallos", "## Detalle de los fallos" in c3 and "falla en el paso «Compilar»" in c3)
+comprobar("informe: el trozo va en un bloque plegado", "<details>" in c3 and "```text" in c3)
+comprobar("informe: propuestas ordenadas por repo", c3.index("**Cookline** #4") < c3.index("**Moodcell** #2"))
+comprobar("informe: antigüedad de la propuesta", "hace 12 días" in c3)
+comprobar("informe: los detalles no crean alertas", a3 == [])
+comprobar("informe: el pie sigue al final", c3.rstrip().endswith("No se compila ni se sube nada desde aquí._"))
+comprobar("sin detalles ni propuestas: igual que antes", "## Detalle" not in cuerpo and "## Propuestas" not in cuerpo)
+gordo = {"repo": "C", "workflow": "W", "fecha": "2026-11-09", "nota": None,
+         "trabajos": [{"nombre": "apk", "paso": "x", "tiempo": False, "trozo": ["y" * 160] * 30}]}
+c4, _ = v.componer(dict(res3, detalles=[gordo] * 40), AHORA, None)
+comprobar("informe enorme: cabe en el issue", len(c4) <= v.TOPE_ISSUE)
+comprobar("informe enorme: el resumen sigue entero", "## Repos" in c4 and "Minutos de Actions este mes" in c4)
+comprobar("informe enorme: los bloques quedan cerrados", c4.count("```text") * 2 == c4.count("```"))
+
 total = ok + len(fallos)
 print(f"Pruebas del vigilante: {ok} de {total} pasan.")
 for f in fallos:

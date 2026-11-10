@@ -9,8 +9,9 @@ GitHub Actions no gasta minutos.
 | Hace | No hace |
 |---|---|
 | Borra los paquetes de Actions viejos de todos los repos (deja el último de cada tipo) | No compila, no sube versiones, no toca el código |
-| Avisa si un workflow sigue fallando | No cambia ajustes de los repos |
+| Avisa si un workflow sigue fallando, y copia el trabajo, el paso y el trozo del registro con el error | No cambia ajustes de los repos |
 | Cuenta los minutos del mes en los repos privados y el espacio de paquetes | No publica nada de los repos privados en este repo |
+| Apunta cada propuesta de Dependabot abierta: número, título y antigüedad | |
 | Mira que la versión del código esté en `CAMBIOS.md` | |
 | Mira el `targetSdk` de las apps de Play contra lo que exige Google | |
 | Avisa de compilaciones con cada push y sin `timeout-minutes` | |
@@ -45,6 +46,8 @@ Mientras no exista, se usa 36.
 | «No pudo terminar (HTTP 403/404)» | Al token le falta un permiso o no tiene acceso a todos los repos |
 | La ejecución sale en rojo pero el issue está bien | Es a propósito: hay alertas 🔴 nuevas |
 | Un repo sale como «no se pudo revisar del todo» | Ese repo no deja leer algo; el resto se revisa igual |
+| En el detalle de un fallo pone «no se pudo leer el registro» | GitHub ya borró ese registro (los guarda unos 90 días) o al token le falta **Actions: Read** |
+| El detalle sale recortado | No cabía en el issue (tope de unos 65.000 caracteres): se acortan primero los trozos de registro |
 
 ## Pruebas
 
